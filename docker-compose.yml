@@ -1,0 +1,29 @@
+version: "3.3"
+
+services:
+  db:
+    container_name: berlin-guide-db
+    image: postgis/postgis:13-master
+    expose:
+      - 5432
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes: 
+      - pgdata:/var/lib/postgresql/data
+
+  api:
+    container_name: berlin-guide-api
+    build: backend
+    depends_on: 
+      - db
+    ports:
+      - 8000:8000
+
+  webapp:
+    container_name: berlin-guide-webapp
+    build: frontend
+    ports:
+      - 3000:3000

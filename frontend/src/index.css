@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;600;700&display=swap");
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+button {
+  font-family: Josefin Sans, Arial, sans-serif;
+}

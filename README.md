@@ -7,7 +7,7 @@ Its goal is to provide clear information on places of interest and services in d
 
 This is a monorepo containing all the moving parts of the web app.
 The application consists of a Django server which persists data in Postgres and provides it through a read-only REST API.
-The data is consumed by frontend client built with React and can also be directly used by the public.
+The data is consumed by a frontend client built with React and can also be directly used by the public.
 Data input is done by authorized users via the Django Admin.
 
 ## Set up for development

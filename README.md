@@ -16,4 +16,4 @@ Data input is done by authorized users via the Django Admin.
 * Copy the `.env.local` template to `.env` and fill in the missing environment variables (Mapbox API token etc.).
 * Make sure you have Docker and Docker Compose installed.
 * Run all the required containers with `docker-compose up`.
-* You're good to go! Any changes in the repos will be reflected in the containers as well thanks to Docker volumes.
+* You're good to go! Any changes will be reflected in the containers as well thanks to Docker volumes.

@@ -4,8 +4,6 @@ services:
   db:
     environment:
       POSTGRES_PASSWORD: "${POSTGRES_PASSWORD:-secretpassword}"
-    volumes:
-    - ./postgres-data:/var/lib/postgresql/data
 
   api:
     command: python manage.py runserver 0.0.0.0:8000
@@ -24,6 +22,3 @@ services:
   webapp:
     volumes:
     - ./frontend/src:/src
-    environment:
-      REACT_APP_MAPBOX_TOKEN: "${REACT_APP_MAPBOX_TOKEN}"
-      REACT_APP_API_URL: "${REACT_APP_API_URL}"

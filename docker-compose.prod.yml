@@ -22,7 +22,7 @@ services:
     image: "ghcr.io/03b8/dcb_berlin_guide_frontend:${TAG:-latest}"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.webapp.rule=Host(`webapp.docker.localhost`)"
+      - "traefik.http.routers.webapp.rule=Host(`localhost`)"
       - "traefik.http.routers.webapp.entrypoints=web"
 
   reverse-proxy:

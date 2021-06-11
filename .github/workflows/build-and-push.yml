@@ -29,7 +29,10 @@ jobs:
         run: docker build backend --tag $BACKEND_IMAGE_NAME --label "runnumber=${GITHUB_RUN_ID}"
       
       - name: Build frontend image
-        run: docker build frontend --tag $FRONTEND_IMAGE_NAME --label "runnumber=${GITHUB_RUN_ID}" -e REACT_APP_MAPBOX_TOKEN=${{ secrets.REACT_APP_MAPBOX_TOKEN }} -e REACT_APP_API_URL="http://api:8000/"
+        run: |
+          docker build frontend --tag $FRONTEND_IMAGE_NAME --label "runnumber=${GITHUB_RUN_ID}" \
+          --build-arg REACT_APP_MAPBOX_TOKEN=${{ secrets.REACT_APP_MAPBOX_TOKEN }} \
+          --build-arg REACT_APP_API_URL="http://api:8000/"
 
       - name: Log into registry
         # This is where you will update the PAT to GITHUB_TOKEN

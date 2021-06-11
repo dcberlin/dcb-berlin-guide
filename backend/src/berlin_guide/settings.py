@@ -50,6 +50,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -139,3 +140,5 @@ REST_FRAMEWORK = {
         "rest_framework.renderers.JSONRenderer",
     ],
 }
+
+STATIC_ROOT = BASE_DIR / "staticfiles"

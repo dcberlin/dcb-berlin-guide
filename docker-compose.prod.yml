@@ -19,9 +19,9 @@ services:
       CORS_ALLOW_ALL_ORIGINS: "${CORS_ALLOW_ALL_ORIGINS}"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.api.rule=Host(`localhost`) && PathPrefix(`/api`)"
-      - "traefik.http.middlewares.test-replacepathregex.replacepathregex.regex=^/api/(.*)"
-      - "traefik.http.middlewares.test-replacepathregex.replacepathregex.replacement=/"
+      - "traefik.http.routers.api.rule=Host(`localhost`) && PathPrefix(`/api`) || PathPrefix(`/admin`)"
+      - "traefik.http.middlewares.api-replacepathregex.replacepathregex.regex=^/api/(.*)"
+      - "traefik.http.middlewares.api-replacepathregex.replacepathregex.replacement=/"
       - "traefik.http.routers.api.entrypoints=web"
 
   webapp:

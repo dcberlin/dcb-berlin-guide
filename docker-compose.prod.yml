@@ -6,6 +6,7 @@ services:
       - POSTGRES_PASSWORD
 
   api:
+    image: "ghcr.io/03b8/dcb_berlin_guide_backend:${TAG:-latest}"
     command: gunicorn --bind 0.0.0.0:8000 berlin_guide.wsgi:application
     environment:
       POSTGRES_HOST: "db"
@@ -18,6 +19,7 @@ services:
       CORS_ALLOW_ALL_ORIGINS: "${CORS_ALLOW_ALL_ORIGINS}"
 
   webapp:
+    image: "ghcr.io/03b8/dcb_berlin_guide_frontend:${TAG:-latest}"
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.webapp.rule=Host(`webapp.docker.localhost`)"

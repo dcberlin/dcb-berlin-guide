@@ -2,7 +2,7 @@ name: Build & Push
 
 on:   
   push:
-    # Publish `master` as Docker `latest` image.
+    # Publish `main` as Docker `latest` image.
     branches:
       - main
 
@@ -10,15 +10,12 @@ on:
     tags:
       - v*
 
-  # Run tests for any PRs.
   pull_request:
 
 env:
   BACKEND_IMAGE_NAME: dcb_berlin_guide_backend
   FRONTEND_IMAGE_NAME: dcb_berlin_guide_frontend
 jobs:
-  # Push image to GitHub Packages.
-  # See also https://docs.docker.com/docker-hub/builds/
   push:
     runs-on: ubuntu-latest
     permissions:
@@ -48,7 +45,7 @@ jobs:
           # Strip "v" prefix from tag name
           [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
           # Use Docker `latest` tag convention
-          [ "$VERSION" == "master" ] && VERSION=latest
+          [ "$VERSION" == "main" ] && VERSION=latest
           echo IMAGE_ID=$IMAGE_ID
           echo VERSION=$VERSION
           docker tag $BACKEND_IMAGE_NAME $IMAGE_ID:$VERSION
@@ -64,7 +61,7 @@ jobs:
           # Strip "v" prefix from tag name
           [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
           # Use Docker `latest` tag convention
-          [ "$VERSION" == "master" ] && VERSION=latest
+          [ "$VERSION" == "main" ] && VERSION=latest
           echo IMAGE_ID=$IMAGE_ID
           echo VERSION=$VERSION
           docker tag $FRONTEND_IMAGE_NAME $IMAGE_ID:$VERSION

@@ -24,7 +24,9 @@ services:
 
   webapp:
     container_name: berlin-guide-webapp
-    build: frontend
+    build:
+      context: frontend
+      dockerfile: Dockerfile.dev
     environment:
       REACT_APP_MAPBOX_TOKEN: "${REACT_APP_MAPBOX_TOKEN}"
       REACT_APP_API_URL: "${REACT_APP_API_URL:-http://localhost:8000}"

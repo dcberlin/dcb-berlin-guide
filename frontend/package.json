@@ -45,5 +45,8 @@
     "@tailwindcss/postcss7-compat": "^2.0.4",
     "autoprefixer": "^9",
     "postcss": "^7"
+  },
+  "babel": {
+    "ignore": ["./node_modules/mapbox-gl/dist/mapbox-gl.js"]
   }
 }

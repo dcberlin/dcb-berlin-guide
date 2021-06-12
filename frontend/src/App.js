@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import ReactMapGL, { Source, Layer } from "react-map-gl";
+import ReactMapGL, { Source } from "react-map-gl";
 import { QueryClient, QueryClientProvider, useQuery } from "react-query";
 
 import { Dialog, Transition } from "@headlessui/react";
@@ -47,7 +47,11 @@ function Routes() {
               </h1>
             </Link>
             <h3 className="text-lg text-right leading-none">un proiect</h3>
-            <img className="h-12 md:h-16" src={dcbLogo} />
+            <img
+              className="h-12 md:h-16"
+              alt="Logo of Diaspora Civica Berlin"
+              src={dcbLogo}
+            />
           </div>
           <Switch>
             {data.map((category) => (
@@ -66,7 +70,7 @@ function Routes() {
 }
 
 function Home() {
-  const { isLoading, error, data } = useQuery("categories", () =>
+  const { data } = useQuery("categories", () =>
     fetch(CATEGORIES_ENDPOINT).then((res) => res.json())
   );
   if (!data) return null;
@@ -96,7 +100,7 @@ function Home() {
 }
 
 function CategoryDetail({ category }) {
-  const { isLoading, error, data } = useQuery("locations", () =>
+  const { data } = useQuery("locations", () =>
     fetch(`${LOCATIONS_ENDPOINT}?category=${category?.pk}`).then((res) =>
       res.json()
     )

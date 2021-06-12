@@ -33,6 +33,9 @@
     "production": [
       ">0.2%",
       "not dead",
+      "not ie 11",
+      "not chrome < 51",
+      "not safari < 10",
       "not op_mini all"
     ],
     "development": [
@@ -45,10 +48,5 @@
     "@tailwindcss/postcss7-compat": "^2.0.4",
     "autoprefixer": "^9",
     "postcss": "^7"
-  },
-  "babel": {
-    "ignore": [
-      "./node_modules/mapbox-gl/dist/mapbox-gl.js"
-    ]
   }
 }

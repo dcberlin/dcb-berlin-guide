@@ -47,6 +47,8 @@
     "postcss": "^7"
   },
   "babel": {
-    "ignore": ["./node_modules/mapbox-gl/dist/mapbox-gl.js"]
+    "ignore": [
+      "./node_modules/mapbox-gl/dist/mapbox-gl.js"
+    ]
   }
 }

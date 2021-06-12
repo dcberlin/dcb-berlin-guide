@@ -11,7 +11,7 @@ RUN : \
   && poetry install --no-dev \
   && pip uninstall --yes poetry \
   && apt update && apt install -y gdal-bin libgdal-dev \
-  && python manage.py collectstatic \
+  && python src/manage.py collectstatic \
   && :
 
 WORKDIR src

@@ -90,6 +90,7 @@ function Home() {
               key={category.pk}
               className="font-body font-bold text-center uppercase text-md md:text-xl"
             >
+              <span style={{ color: CATEGORY_COLOR_MAP[category.pk] }}>⬤ </span>
               {category?.label_plural}
             </button>
           </Link>

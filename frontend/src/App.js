@@ -40,7 +40,7 @@ function Routes() {
         <div className="bg-red-500 h-8"></div>
 
         <div className="px-5 md:px-40 py-5 md:py-10">
-          <div className="flex flex-wrap gap-4 pb-6 justify-left items-center">
+          <div className="flex md:flex-wrap gap-4 pb-6 justify-left items-center">
             <Link to="/">
               <h1 className="font-bold text-2xl w-full md:w-max uppercase">
                 Harta românilor <br /> în Berlin
@@ -77,7 +77,7 @@ function Home() {
 
   return (
     <div>
-      <div className="grid md:grid-rows-4 grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="grid md:grid-rows-5 grid-cols-2 md:grid-cols-4 gap-4">
         <div className="bg-red-200 row-span-2 col-span-2 md:col-span-4 lg:col-span-3 relative border-t-4 border-red-500">
           <ModalMap />
         </div>

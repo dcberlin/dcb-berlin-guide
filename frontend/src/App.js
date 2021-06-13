@@ -142,6 +142,8 @@ function Map({ locations, onClick }) {
   });
 
   const geojson = locations || {};
+  let pinData = { ...geojson };
+  pinData.features = pinData.features.filter((feature) => feature.geometry);
 
   return (
     <ReactMapGL
@@ -151,7 +153,7 @@ function Map({ locations, onClick }) {
       onViewportChange={setViewport}
       mapboxApiAccessToken={MAPBOX_TOKEN}
     >
-      <Source id="my-data" type="geojson" data={geojson}>
+      <Source id="my-data" type="geojson" data={pinData}>
         <Pins
           data={geojson.features}
           onClick={(feature) => onClick(feature.properties)}

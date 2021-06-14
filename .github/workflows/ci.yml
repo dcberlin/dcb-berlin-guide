@@ -1,4 +1,4 @@
-name: Build & Push
+name: CI
 
 on:   
   push:
@@ -69,3 +69,26 @@ jobs:
           echo VERSION=$VERSION
           docker tag $FRONTEND_IMAGE_NAME $IMAGE_ID:$VERSION
           docker push $IMAGE_ID:$VERSION
+
+      - name: Configure SSH
+        run: |
+          mkdir -p ~/.ssh/
+          echo "$SSH_KEY" > ~/.ssh/staging.key
+          chmod 600 ~/.ssh/staging.key
+          cat >>~/.ssh/config <<END
+          Host prod
+            HostName $SSH_HOST
+            User $SSH_USER
+            IdentityFile ~/.ssh/staging.key
+            StrictHostKeyChecking no
+          END
+        env:
+          SSH_USER: ${{ secrets.STAGING_SSH_USER }}
+          SSH_KEY: ${{ secrets.STAGING_SSH_KEY }}
+          SSH_HOST: ${{ secrets.STAGING_SSH_HOST }}
+
+      - name: Deploy backend
+        run: ssh prod 'docker service update --image ghcr.io/03b8/dcb_berlin_guide_backend:latest berlin-guide_api'
+      
+      - name: Deploy frontend
+        run: ssh prod 'docker service update --image ghcr.io/03b8/dcb_berlin_guide_frontend:latest berlin-guide_webapp'

@@ -12,7 +12,7 @@ const distinctColors = [
   "#ffff99",
   "#b15928",
   "#000000",
-  "#ffffff",
+  "#ff00d7",
 ];
 
 const CATEGORY_COLOR_MAP = {};

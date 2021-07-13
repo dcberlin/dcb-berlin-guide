@@ -1,24 +1,21 @@
-import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import * as React from "react";
 import ReactMapGL, { Source } from "react-map-gl";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { QueryClient, QueryClientProvider, useQuery } from "react-query";
-
 import { Dialog, Transition } from "@headlessui/react";
 
+import { CATEGORY_COLOR_MAP, MAPBOX_TOKEN, ENDPOINTS } from "./constants";
+import { fetchCategories, fetchLocations } from "./utils";
 import Pins from "./Pins";
-import CATEGORY_COLOR_MAP from "./constants";
 import dcbLogo from "./images/dcbLogo.png";
 
 import "./App.css";
 
-const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_TOKEN;
-const API_URL = process.env.REACT_APP_API_URL;
-
-const LOCATIONS_ENDPOINT = `${API_URL}/api/locations/`;
-const CATEGORIES_ENDPOINT = `${API_URL}/api/categories/`;
-
 const queryClient = new QueryClient();
 
+/**
+ * Root component. Contains the router wrapped by React Query provider.
+ */
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
@@ -27,10 +24,11 @@ function App() {
   );
 }
 
+/**
+ * Router component with header and routes for category pages.
+ */
 function Routes() {
-  const { isLoading, error, data } = useQuery("categories", () =>
-    fetch(CATEGORIES_ENDPOINT).then((res) => res.json())
-  );
+  const { isLoading, error, data } = useQuery("categories", fetchCategories);
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>An error has occurred: {error.message}</div>;
 
@@ -47,15 +45,17 @@ function Routes() {
               </h1>
             </Link>
             <h3 className="text-lg text-right leading-none">un proiect</h3>
-            <img
-              className="h-12 md:h-16"
-              alt="Logo of Diaspora Civica Berlin"
-              src={dcbLogo}
-            />
+            <a href="https://diasporacivica.berlin">
+              <img
+                className="h-12 md:h-16"
+                alt="Logo of Diaspora Civica Berlin"
+                src={dcbLogo}
+              />
+            </a>
           </div>
           <Switch>
-            {data.map((category) => (
-              <Route path={`/${category.name_slug}`}>
+            {data.map((category, index) => (
+              <Route path={`/${category.name_slug}`} key={index}>
                 <CategoryDetail category={category} />
               </Route>
             ))}
@@ -69,22 +69,27 @@ function Routes() {
   );
 }
 
+/**
+ * Landing page, containing the map with all POIs and buttons leading to category pages.
+ */
 function Home() {
-  const { data } = useQuery("categories", () =>
-    fetch(CATEGORIES_ENDPOINT).then((res) => res.json())
-  );
-  if (!data) return null;
+  const { isLoading: categoryIsLoading, error: categoryError, data: categoryData } = useQuery("categories", fetchCategories);
+  const { isLoading: locationIsLoading, error: locationError, data: locationData } = useQuery("locations", fetchLocations);
+
+  if (locationIsLoading || categoryIsLoading) return <div>Loading...</div>;
+  if (locationError || categoryError ) return <div>An error has occurred: {locationError?.message || categoryError?.message}</div>;
 
   return (
     <div>
       <div className="grid md:grid-rows-5 grid-cols-2 md:grid-cols-4 gap-4">
         <div className="bg-red-200 row-span-2 col-span-2 md:col-span-4 lg:col-span-3 relative border-t-4 border-red-500">
-          <ModalMap />
+          <ModalMap data={locationData} />
         </div>
-        {data.map((category) => (
+        {categoryData.map((category, index) => (
           <Link
             to={`/${category.name_slug}`}
             className="flex p-5 bg-gray-200 hover:bg-gray-300 items-center justify-center border-t-4 hover:border-black cursor-pointer text-gray-500 hover:text-black transition-all"
+            key={index}
           >
             <button
               key={category.pk}
@@ -95,32 +100,32 @@ function Home() {
             </button>
           </Link>
         ))}
-      </div>
     </div>
-  );
+  </div>
+);
 }
 
+/**
+* Category detail, contains a map with the category subset of POIs, which are also listed underneath.
+*/
 function CategoryDetail({ category }) {
-  const { data } = useQuery("locations", () =>
-    fetch(`${LOCATIONS_ENDPOINT}?category=${category?.pk}`).then((res) =>
-      res.json()
-    )
-  );
-  if (!data) return null;
-  return (
+const { data } = useQuery("locations", () =>
+  fetch(`${ENDPOINTS.LOCATIONS}?category=${category?.pk}`).then((res) =>
+    res.json()
+  )
+);
+if (!data) return null;
+return (
+  <div>
     <div>
-      <div>
-        <h1 className="font-bold text-2xl text-red-500 w-full md:w-max uppercase">
-          {category.label_plural}
-        </h1>
-      </div>
+      <h1 className="font-bold text-2xl text-red-500 w-full md:w-max uppercase">
+        {category.label_plural}
+      </h1>
+    </div>
 
-      <div className="grid md:grid-rows-4 grid-cols-1 gap-4">
-        <div className="bg-red-200 row-span-2 col-span-1 relative border-t-4 border-red-500">
-          <Map
-            locations={data}
-            onClick={(location) => console.log({ location })}
-          />
+    <div className="grid md:grid-rows-4 grid-cols-1 gap-4">
+      <div className="bg-red-200 row-span-2 col-span-1 relative border-t-4 border-red-500">
+        <ModalMap data={data} />
         </div>
         {data.features.map((location) => (
           <button
@@ -135,6 +140,11 @@ function CategoryDetail({ category }) {
   );
 }
 
+/**
+ * Map with POIs. The viewport is set to frame the central part of Berlin.
+ * @param {object} locations The POI data as GeoJSON object.
+ * @param {function} onClick Callback for a click event on a pin.
+ */
 function Map({ locations, onClick }) {
   const [viewport, setViewport] = React.useState({
     latitude: 52.520008,
@@ -142,9 +152,10 @@ function Map({ locations, onClick }) {
     zoom: 11.3,
   });
 
-  const geojson = locations || {};
-  let pinData = { ...geojson };
-  pinData.features = pinData.features.filter((feature) => feature.geometry);
+  let pinData = {}
+  if (locations.features) {
+    pinData = { ...locations, features: locations.features.filter((feature) => feature.geometry) }
+  }
 
   return (
     <ReactMapGL
@@ -156,30 +167,20 @@ function Map({ locations, onClick }) {
     >
       <Source id="my-data" type="geojson" data={pinData}>
         <Pins
-          data={geojson.features}
-          onClick={(feature) => onClick(feature.properties)}
+          data={pinData.features}
+          onClick={onClick}
         />
       </Source>
     </ReactMapGL>
   );
 }
 
-function ModalMap() {
+/**
+ * Map which displays a small modal with POI details when a pin is clicked.
+ * @param {object} data The POI data as GeoJSON object.
+ */
+function ModalMap({ data }) {
   const [selectedLocation, setSelectedLocation] = React.useState(null);
-  const [viewport, setViewport] = React.useState({
-    latitude: 52.520008,
-    longitude: 13.404954,
-    zoom: 11.3,
-  });
-
-  const { isLoading, error, data } = useQuery("locations", () =>
-    fetch(LOCATIONS_ENDPOINT).then((res) => res.json())
-  );
-
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>An error has occurred: {error.message}</div>;
-
-  const geojson = data || {};
 
   function closeModal() {
     setSelectedLocation(null);
@@ -187,20 +188,7 @@ function ModalMap() {
 
   return (
     <>
-      <ReactMapGL
-        {...viewport}
-        width="100%"
-        height="50vh"
-        onViewportChange={setViewport}
-        mapboxApiAccessToken={MAPBOX_TOKEN}
-      >
-        <Source id="my-data" type="geojson" data={geojson}>
-          <Pins
-            data={geojson.features}
-            onClick={(feature) => setSelectedLocation(feature.properties)}
-          />
-        </Source>
-      </ReactMapGL>
+      <Map locations={data} onClick={(feature) => setSelectedLocation(feature.properties)} />
 
       <Transition appear show={!!selectedLocation} as={React.Fragment}>
         <Dialog

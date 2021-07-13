@@ -21,4 +21,11 @@ distinctColors.forEach(
   (color, index) => (CATEGORY_COLOR_MAP[index + 1] = color)
 );
 
-export default CATEGORY_COLOR_MAP;
+const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_TOKEN;
+
+const API_URL = process.env.REACT_APP_API_URL;
+const ENDPOINTS = {
+  LOCATIONS: `${API_URL}/api/locations/`,
+  CATEGORIES: `${API_URL}/api/categories/`,
+}
+export { CATEGORY_COLOR_MAP, MAPBOX_TOKEN, API_URL, ENDPOINTS };

@@ -54,8 +54,8 @@ function Routes() {
             </a>
           </div>
           <Switch>
-            {data.map((category) => (
-              <Route path={`/${category.name_slug}`}>
+            {data.map((category, index) => (
+              <Route path={`/${category.name_slug}`} key={index}>
                 <CategoryDetail category={category} />
               </Route>
             ))}
@@ -85,10 +85,11 @@ function Home() {
         <div className="bg-red-200 row-span-2 col-span-2 md:col-span-4 lg:col-span-3 relative border-t-4 border-red-500">
           <ModalMap data={locationData} />
         </div>
-        {categoryData.map((category) => (
+        {categoryData.map((category, index) => (
           <Link
             to={`/${category.name_slug}`}
             className="flex p-5 bg-gray-200 hover:bg-gray-300 items-center justify-center border-t-4 hover:border-black cursor-pointer text-gray-500 hover:text-black transition-all"
+            key={index}
           >
             <button
               key={category.pk}

@@ -29,7 +29,7 @@ function Pins({ data, onClick }) {
             stroke: "none",
             transform: `translate(${-SIZE / 2}px,${-SIZE}px)`,
           }}
-          onClick={() => onClick(data)}
+          onClick={() => onClick(location)}
         >
           <path d={ICON} />
         </svg>

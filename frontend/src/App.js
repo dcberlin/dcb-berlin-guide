@@ -1,21 +1,14 @@
 import * as React from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import ReactMapGL, { Source } from "react-map-gl";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { QueryClient, QueryClientProvider, useQuery } from "react-query";
-
 import { Dialog, Transition } from "@headlessui/react";
 
+import { CATEGORY_COLOR_MAP, MAPBOX_TOKEN, ENDPOINTS } from "./constants";
 import Pins from "./Pins";
-import CATEGORY_COLOR_MAP from "./constants";
 import dcbLogo from "./images/dcbLogo.png";
 
 import "./App.css";
-
-const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_TOKEN;
-const API_URL = process.env.REACT_APP_API_URL;
-
-const LOCATIONS_ENDPOINT = `${API_URL}/api/locations/`;
-const CATEGORIES_ENDPOINT = `${API_URL}/api/categories/`;
 
 const queryClient = new QueryClient();
 
@@ -35,7 +28,7 @@ function App() {
  */
 function Routes() {
   const { isLoading, error, data } = useQuery("categories", () =>
-    fetch(CATEGORIES_ENDPOINT).then((res) => res.json())
+    fetch(ENDPOINTS.CATEGORIES).then((res) => res.json())
   );
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>An error has occurred: {error.message}</div>;
@@ -82,10 +75,10 @@ function Routes() {
  */
 function Home() {
   const { isLoading: categoryIsLoading, error: categoryError, data: categoryData } = useQuery("categories", () =>
-    fetch(CATEGORIES_ENDPOINT).then((res) => res.json())
+    fetch(ENDPOINTS.CATEGORIES).then((res) => res.json())
   );
   const { isLoading: locationIsLoading, error: locationError, data: locationData } = useQuery("locations", () =>
-    fetch(LOCATIONS_ENDPOINT).then((res) => res.json())
+    fetch(ENDPOINTS.LOCATIONS).then((res) => res.json())
   );
 
   if (locationIsLoading || categoryIsLoading) return <div>Loading...</div>;
@@ -121,7 +114,7 @@ function Home() {
 */
 function CategoryDetail({ category }) {
 const { data } = useQuery("locations", () =>
-  fetch(`${LOCATIONS_ENDPOINT}?category=${category?.pk}`).then((res) =>
+  fetch(`${ENDPOINTS.LOCATIONS}?category=${category?.pk}`).then((res) =>
     res.json()
   )
 );

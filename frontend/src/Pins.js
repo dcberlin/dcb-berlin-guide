@@ -9,11 +9,15 @@ const ICON = `M20.2,15.7L20.2,15.7c1.1-1.6,1.8-3.6,1.8-5.7c0-5.6-4.5-10-10-10S2,
 
 const SIZE = 25;
 
-// Important for perf: the markers never change, avoid rerender when the map viewport changes
+/**
+ * Pins for representing POIs across all categories.
+ * @param {array} All locations to be represented by the pins, as GeoJSON features.
+ * @param {function} Callback for a click event on a pin.
+ */
 function Pins({ data, onClick }) {
-  return data.map((data, index) => {
-    const [lon, lat] = data.geometry.coordinates;
-    const { category } = data.properties;
+  return data.map((location, index) => {
+    const [lon, lat] = location.geometry.coordinates;
+    const { category } = location.properties;
     return (
       <Marker key={`marker-${index}`} longitude={lon} latitude={lat}>
         <svg
@@ -34,4 +38,5 @@ function Pins({ data, onClick }) {
   });
 }
 
+// Important for performance: the markers never change, avoid rerender when the map viewport changes
 export default React.memo(Pins);

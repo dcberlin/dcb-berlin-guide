@@ -53,11 +53,13 @@ function Routes() {
               </h1>
             </Link>
             <h3 className="text-lg text-right leading-none">un proiect</h3>
-            <img
-              className="h-12 md:h-16"
-              alt="Logo of Diaspora Civica Berlin"
-              src={dcbLogo}
-            />
+            <a href="https://diasporacivica.berlin">
+              <img
+                className="h-12 md:h-16"
+                alt="Logo of Diaspora Civica Berlin"
+                src={dcbLogo}
+              />
+            </a>
           </div>
           <Switch>
             {data.map((category) => (

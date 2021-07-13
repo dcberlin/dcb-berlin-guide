@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider, useQuery } from "react-query";
 import { Dialog, Transition } from "@headlessui/react";
 
 import { CATEGORY_COLOR_MAP, MAPBOX_TOKEN, ENDPOINTS } from "./constants";
+import { fetchCategories, fetchLocations } from "./utils";
 import Pins from "./Pins";
 import dcbLogo from "./images/dcbLogo.png";
 
@@ -27,9 +28,7 @@ function App() {
  * Router component with header and routes for category pages.
  */
 function Routes() {
-  const { isLoading, error, data } = useQuery("categories", () =>
-    fetch(ENDPOINTS.CATEGORIES).then((res) => res.json())
-  );
+  const { isLoading, error, data } = useQuery("categories", fetchCategories);
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>An error has occurred: {error.message}</div>;
 
@@ -74,12 +73,8 @@ function Routes() {
  * Landing page, containing the map with all POIs and buttons leading to category pages.
  */
 function Home() {
-  const { isLoading: categoryIsLoading, error: categoryError, data: categoryData } = useQuery("categories", () =>
-    fetch(ENDPOINTS.CATEGORIES).then((res) => res.json())
-  );
-  const { isLoading: locationIsLoading, error: locationError, data: locationData } = useQuery("locations", () =>
-    fetch(ENDPOINTS.LOCATIONS).then((res) => res.json())
-  );
+  const { isLoading: categoryIsLoading, error: categoryError, data: categoryData } = useQuery("categories", fetchCategories);
+  const { isLoading: locationIsLoading, error: locationError, data: locationData } = useQuery("locations", fetchLocations);
 
   if (locationIsLoading || categoryIsLoading) return <div>Loading...</div>;
   if (locationError || categoryError ) return <div>An error has occurred: {locationError?.message || categoryError?.message}</div>;

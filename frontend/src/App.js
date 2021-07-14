@@ -190,79 +190,83 @@ function ModalMap({ data }) {
     <>
       <Map locations={data} onClick={(feature) => setSelectedLocation(feature.properties)} />
 
-      <Transition appear show={!!selectedLocation} as={React.Fragment}>
         <Dialog
           as="div"
           className="fixed inset-0 z-10 overflow-y-auto"
           onClose={closeModal}
           open={!!selectedLocation}
         >
-          <div className="min-h-screen px-4 text-center">
-            <Transition.Child
-              as={React.Fragment}
-              enter="ease-out duration-300"
-              enterFrom="opacity-0"
-              enterTo="opacity-100"
-            >
-              <Dialog.Overlay className="fixed inset-0" />
-            </Transition.Child>
+          <Transition
+            appear
+            show={!!selectedLocation}
+            as={React.Fragment}
+          >
+            <div className="min-h-screen px-4 text-center">
+              <Transition.Child
+                as={React.Fragment}
+                enter="ease-out duration-300"
+                enterFrom="opacity-0"
+                enterTo="opacity-100"
+              >
+                <Dialog.Overlay className="fixed inset-0" />
+              </Transition.Child>
 
-            <span
-              className="inline-block h-screen align-middle"
-              aria-hidden="true"
-            >
-              &#8203;
-            </span>
-            <Transition.Child
-              as={React.Fragment}
-              enter="ease-out duration-300"
-              enterFrom="opacity-0 scale-95"
-              enterTo="opacity-100 scale-100"
-            >
-              <div className="inline-block w-full max-w-xl p-6 my-0 md:my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl">
-                <Dialog.Title
-                  as="h3"
-                  className="text-xl font-bold font-medium leading-6 text-gray-900"
-                >
-                  <div className="flex cols-2 justify-between">
-                    <div>
-                      <span
-                        className={`font-semibold text-sm uppercase text-${
-                          CATEGORY_COLOR_MAP[selectedLocation?.category?.pk]
-                        }-400`}
-                      >
-                        {selectedLocation?.category?.label_singular}
-                      </span>
-                      <div>{selectedLocation?.name}</div>
+              <span
+                className="inline-block h-screen align-middle"
+                aria-hidden="true"
+              >
+                &#8203;
+              </span>
+              <Transition.Child
+                as={React.Fragment}
+                enter="ease-out duration-300"
+                enterFrom="opacity-0"
+                enterTo="opacity-100"
+              >
+                <div className="inline-block w-full max-w-xl p-6 my-0 md:my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl">
+                  <Dialog.Title
+                    as="h3"
+                    className="text-xl font-bold font-medium leading-6 text-gray-900"
+                  >
+                    <div className="flex cols-2 justify-between">
+                      <div>
+                        <span
+                          className={`font-semibold text-sm uppercase text-${
+                            CATEGORY_COLOR_MAP[selectedLocation?.category?.pk]
+                          }-400`}
+                        >
+                          {selectedLocation?.category?.label_singular}
+                        </span>
+                        <div>{selectedLocation?.name}</div>
+                      </div>
+                      <div className="flex">
+                        <button
+                          type="button"
+                          className="justify-center h-8 w-8 text-lg font-bold text-gray-600 bg-gray-100 border border-transparent rounded-3xl hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-red-500"
+                          onClick={closeModal}
+                        >
+                          x
+                        </button>
+                      </div>
                     </div>
-                    <div className="flex">
-                      <button
-                        type="button"
-                        className="justify-center h-8 w-8 text-lg font-bold text-gray-600 bg-gray-100 border border-transparent rounded-3xl hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-red-500"
-                        onClick={closeModal}
-                      >
-                        x
-                      </button>
-                    </div>
+                  </Dialog.Title>
+                  <div className="mt-2">
+                    <p className="text-sm text-gray-500">
+                      {selectedLocation?.description}
+                    </p>
                   </div>
-                </Dialog.Title>
-                <div className="mt-2">
-                  <p className="text-sm text-gray-500">
-                    {selectedLocation?.description}
-                  </p>
-                </div>
 
-                <div className="mt-4">
-                  <div>{selectedLocation?.address}</div>
-                  <div>{selectedLocation?.description}</div>
-                  <div>{selectedLocation?.email}</div>
-                  <a href={selectedLocation?.website}>{selectedLocation?.website}</a>
+                  <div className="mt-4">
+                    <div>{selectedLocation?.address}</div>
+                    <div>{selectedLocation?.description}</div>
+                    <div>{selectedLocation?.email}</div>
+                    <a href={selectedLocation?.website}>{selectedLocation?.website}</a>
+                  </div>
                 </div>
-              </div>
-            </Transition.Child>
-          </div>
+              </Transition.Child>
+            </div>
+          </Transition>
         </Dialog>
-      </Transition>
     </>
   );
 }

@@ -256,7 +256,7 @@ function ModalMap({ data }) {
                   <div>{selectedLocation?.address}</div>
                   <div>{selectedLocation?.description}</div>
                   <div>{selectedLocation?.email}</div>
-                  <div>{selectedLocation?.website}</div>
+                  <a href={selectedLocation?.website}>{selectedLocation?.website}</a>
                 </div>
               </div>
             </Transition.Child>

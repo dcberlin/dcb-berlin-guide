@@ -45,9 +45,8 @@ function Routes() {
               </h1>
             </Link>
             <h3 className="text-lg text-right leading-none">un proiect</h3>
-            <a href="https://diasporacivica.berlin">
+            <a className="h-12 md:h-16" href="https://diasporacivica.berlin">
               <img
-                className="h-12 md:h-16"
                 alt="Logo of Diaspora Civica Berlin"
                 src={dcbLogo}
               />

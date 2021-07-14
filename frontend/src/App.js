@@ -181,6 +181,7 @@ function Map({ locations, onClick }) {
  */
 function ModalMap({ data }) {
   const [selectedLocation, setSelectedLocation] = React.useState(null);
+  const dialogTitleRef = React.useRef(null)
 
   function closeModal() {
     setSelectedLocation(null);
@@ -195,6 +196,7 @@ function ModalMap({ data }) {
           className="fixed inset-0 z-10 overflow-y-auto"
           onClose={closeModal}
           open={!!selectedLocation}
+          initialFocus={dialogTitleRef}
         >
           <Transition
             appear
@@ -228,7 +230,10 @@ function ModalMap({ data }) {
                     as="h3"
                     className="text-xl font-bold font-medium leading-6 text-gray-900"
                   >
-                    <div className="flex cols-2 justify-between">
+                    <div
+                      className="flex cols-2 justify-between"
+                      ref={dialogTitleRef}
+                    >
                       <div>
                         <span
                           className={`font-semibold text-sm uppercase text-${

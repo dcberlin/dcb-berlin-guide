@@ -122,14 +122,14 @@ return (
       </h1>
     </div>
 
-    <div className="grid md:grid-rows-4 grid-cols-1 gap-4">
+    <div className="grid md:grid-rows-10 grid-cols-1 gap-4">
       <div className="bg-red-200 row-span-2 col-span-1 relative border-t-4 border-red-500">
         <ModalMap data={data} />
         </div>
         {data.features.map((location) => (
           <button
             key={location.properties.pk}
-            className="flex p-5 bg-gray-200 hover:bg-gray-300 items-center justify-center border-t-4 hover:border-black cursor-pointer text-gray-500 hover:text-black font-body font-bold text-center uppercase text-md md:text-xl transition-all"
+            className="flex p-5 bg-none hover:bg-gray-100 items-center justify-center border-t-4 hover:border-red-300 cursor-pointer text-gray-500 hover:text-black font-body font-bold text-center uppercase text-md md:text-xl transition-all"
           >
             {location.properties.name}
           </button>

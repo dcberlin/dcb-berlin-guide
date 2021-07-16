@@ -146,9 +146,9 @@ return (
  */
 function Map({ locations, onClick }) {
   const [viewport, setViewport] = React.useState({
-    latitude: 52.520008,
-    longitude: 13.404954,
-    zoom: 11.3,
+    latitude: 52.518008,
+    longitude: 13.390954,
+    zoom: 11.1,
   });
 
   let pinData = {}

@@ -71,6 +71,8 @@ services:
       - "--entrypoints.http.address=:80"
       - "--api"
     ports:
-      - "80:80"
+      - target: 80
+        published: 80
+        mode: host
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"

@@ -23,7 +23,7 @@ services:
       CORS_ALLOW_ALL_ORIGINS: "${CORS_ALLOW_ALL_ORIGINS}"
       SECRET_KEY: "${SECRET_KEY}"
     deploy:
-      replicas: 2
+      replicas: 1
       update_config:
         parallelism: 2
         delay: 10s
@@ -40,7 +40,7 @@ services:
     depends_on:
       - api
     deploy:
-      replicas: 2
+      replicas: 1
       update_config:
         parallelism: 2
         delay: 10s

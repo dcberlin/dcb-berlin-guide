@@ -1,4 +1,4 @@
-FROM node:16-alpine as build-deps
+FROM node:16-alpine as built-client
 WORKDIR /usr/src/app
 
 ARG REACT_APP_MAPBOX_TOKEN
@@ -12,7 +12,7 @@ COPY . ./
 RUN yarn build
 
 FROM nginx:1.12-alpine
-COPY --from=build-deps /usr/src/app/build /usr/share/nginx/html
-COPY /usr/src/app/nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=built-client /usr/src/app/build /usr/share/nginx/html
+COPY --from=built-client /usr/src/app/nginx.conf /etc/nginx/conf.d/default.conf
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]

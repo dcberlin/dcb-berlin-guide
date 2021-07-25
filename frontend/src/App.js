@@ -51,11 +51,6 @@ function Routes() {
         </div>
       </div>
       <Switch>
-        {data.map((category, index) => (
-          <Route path={`/${category.name_slug}`} key={index}>
-            <CategoryDetail category={category} />
-          </Route>
-        ))}
         <Route path="/">
           <Home />
         </Route>
@@ -101,41 +96,6 @@ function Home() {
         </div>
       </div>
     </>
-  );
-}
-
-/**
- * Category detail, contains a map with the category subset of POIs, which are also listed underneath.
- */
-function CategoryDetail({ category }) {
-  const { data } = useQuery("locations", () =>
-    fetch(`${ENDPOINTS.LOCATIONS}?category=${category?.pk}`).then((res) =>
-      res.json()
-    )
-  );
-  if (!data) return null;
-  return (
-    <div>
-      <div>
-        <h1 className="font-bold text-2xl text-red-500 w-full md:w-max uppercase">
-          {category.label_plural}
-        </h1>
-      </div>
-
-      <div className="grid md:grid-rows-10 grid-cols-1 gap-4">
-        <div className="bg-red-200 row-span-2 col-span-1 relative border-t-4 border-red-500">
-          <ModalMap data={data} />
-        </div>
-        {data.features.map((location) => (
-          <button
-            key={location.properties.pk}
-            className="flex p-5 bg-none hover:bg-gray-100 items-center justify-center border-t-4 hover:border-red-300 cursor-pointer text-gray-500 hover:text-black font-body font-bold text-center uppercase text-md md:text-xl transition-all"
-          >
-            {location.properties.name}
-          </button>
-        ))}
-      </div>
-    </div>
   );
 }
 

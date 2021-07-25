@@ -3,10 +3,13 @@ import ReactMapGL, { Source } from "react-map-gl";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { QueryClient, QueryClientProvider, useQuery } from "react-query";
 import { Dialog, Transition } from "@headlessui/react";
+import { XCircleIcon } from "@heroicons/react/outline";
+import { LocationMarkerIcon, LinkIcon } from "@heroicons/react/solid";
 
 import { CATEGORY_COLOR_MAP, MAPBOX_TOKEN, ENDPOINTS } from "./constants";
 import { fetchCategories, fetchLocations } from "./utils";
 import Pins from "./Pins";
+import Select from "./Select";
 import dcbLogo from "./images/dcbLogo.png";
 
 import "./App.css";
@@ -34,36 +37,29 @@ function Routes() {
 
   return (
     <Router>
-      <div>
+      <div className="relative z-20">
         <div className="bg-red-500 h-8"></div>
-
-        <div className="px-5 md:px-40 py-5 md:py-10">
-          <div className="flex md:flex-wrap gap-4 pb-6 justify-left items-center">
-            <Link to="/">
-              <h1 className="font-bold text-2xl w-full md:w-max uppercase">
-                Harta românilor <br /> în Berlin
-              </h1>
-            </Link>
-            <h3 className="text-lg text-right leading-none">un proiect</h3>
-            <a className="flex h-12 md:h-16" href="https://diasporacivica.berlin">
-              <img
-                alt="Logo of Diaspora Civica Berlin"
-                src={dcbLogo}
-              />
-            </a>
-          </div>
-          <Switch>
-            {data.map((category, index) => (
-              <Route path={`/${category.name_slug}`} key={index}>
-                <CategoryDetail category={category} />
-              </Route>
-            ))}
-            <Route path="/">
-              <Home />
-            </Route>
-          </Switch>
+        <div className="flex items-center justify-center gap-4 sm:gap-32 p-8 bg-opacity-40 bg-white">
+          <Link to="/">
+            <h1 className="font-bold text-xl w-full md:w-max uppercase">
+              Harta diasporei <br /> din Berlin
+            </h1>
+          </Link>
+          <a className="w-32" href="https://diasporacivica.berlin">
+            <img alt="Logo of Diaspora Civica Berlin" src={dcbLogo} />
+          </a>
         </div>
       </div>
+      <Switch>
+        {data.map((category, index) => (
+          <Route path={`/${category.name_slug}`} key={index}>
+            <CategoryDetail category={category} />
+          </Route>
+        ))}
+        <Route path="/">
+          <Home />
+        </Route>
+      </Switch>
     </Router>
   );
 }
@@ -72,59 +68,63 @@ function Routes() {
  * Landing page, containing the map with all POIs and buttons leading to category pages.
  */
 function Home() {
-  const { isLoading: categoryIsLoading, error: categoryError, data: categoryData } = useQuery("categories", fetchCategories);
-  const { isLoading: locationIsLoading, error: locationError, data: locationData } = useQuery("locations", fetchLocations);
+  const [selectedCategory, setSelectedCategory] = React.useState(null);
+  const {
+    isLoading: categoryIsLoading,
+    error: categoryError,
+    data: categoryData,
+  } = useQuery("categories", fetchCategories);
+  const {
+    isLoading: locationIsLoading,
+    error: locationError,
+    data: locationData,
+  } = useQuery("locations", fetchLocations);
 
   if (locationIsLoading || categoryIsLoading) return <div>Loading...</div>;
-  if (locationError || categoryError ) return <div>An error has occurred: {locationError?.message || categoryError?.message}</div>;
+  if (locationError || categoryError)
+    return (
+      <div>
+        An error has occurred:{" "}
+        {locationError?.message || categoryError?.message}
+      </div>
+    );
 
   return (
-    <div>
-      <div className="grid md:grid-rows-5 grid-cols-2 md:grid-cols-4 gap-4">
-        <div className="bg-red-200 row-span-2 col-span-2 md:col-span-4 lg:col-span-3 relative border-t-4 border-red-500">
-          <ModalMap data={locationData} />
+    <>
+      <div className="absolute inset-0">
+        <ModalMap data={locationData} category={selectedCategory} />
+        <div className="absolute bottom-20 right-0">
+          <Select
+            data={categoryData}
+            onSelect={(category) => setSelectedCategory(category)}
+          />
         </div>
-        {categoryData.map((category, index) => (
-          <Link
-            to={`/${category.name_slug}`}
-            className="flex p-5 bg-gray-200 hover:bg-gray-300 items-center justify-center border-t-4 hover:border-black cursor-pointer text-gray-500 hover:text-black transition-all"
-            key={index}
-          >
-            <button
-              key={category.pk}
-              className="font-body font-bold text-center uppercase text-md md:text-xl"
-            >
-              <span style={{ color: CATEGORY_COLOR_MAP[category.pk] }}>⬤ </span>
-              {category?.label_plural}
-            </button>
-          </Link>
-        ))}
-    </div>
-  </div>
-);
+      </div>
+    </>
+  );
 }
 
 /**
-* Category detail, contains a map with the category subset of POIs, which are also listed underneath.
-*/
+ * Category detail, contains a map with the category subset of POIs, which are also listed underneath.
+ */
 function CategoryDetail({ category }) {
-const { data } = useQuery("locations", () =>
-  fetch(`${ENDPOINTS.LOCATIONS}?category=${category?.pk}`).then((res) =>
-    res.json()
-  )
-);
-if (!data) return null;
-return (
-  <div>
+  const { data } = useQuery("locations", () =>
+    fetch(`${ENDPOINTS.LOCATIONS}?category=${category?.pk}`).then((res) =>
+      res.json()
+    )
+  );
+  if (!data) return null;
+  return (
     <div>
-      <h1 className="font-bold text-2xl text-red-500 w-full md:w-max uppercase">
-        {category.label_plural}
-      </h1>
-    </div>
+      <div>
+        <h1 className="font-bold text-2xl text-red-500 w-full md:w-max uppercase">
+          {category.label_plural}
+        </h1>
+      </div>
 
-    <div className="grid md:grid-rows-10 grid-cols-1 gap-4">
-      <div className="bg-red-200 row-span-2 col-span-1 relative border-t-4 border-red-500">
-        <ModalMap data={data} />
+      <div className="grid md:grid-rows-10 grid-cols-1 gap-4">
+        <div className="bg-red-200 row-span-2 col-span-1 relative border-t-4 border-red-500">
+          <ModalMap data={data} />
         </div>
         {data.features.map((location) => (
           <button
@@ -151,26 +151,131 @@ function Map({ locations, onClick }) {
     zoom: 11.1,
   });
 
-  let pinData = {}
+  let pinData = {};
   if (locations.features) {
-    pinData = { ...locations, features: locations.features.filter((feature) => feature.geometry) }
+    pinData = {
+      ...locations,
+      features: locations.features.filter((feature) => feature.geometry),
+    };
   }
 
   return (
     <ReactMapGL
       {...viewport}
       width="100%"
-      height="50vh"
+      height="100vh"
       onViewportChange={setViewport}
       mapboxApiAccessToken={MAPBOX_TOKEN}
     >
       <Source id="my-data" type="geojson" data={pinData}>
-        <Pins
-          data={pinData.features}
-          onClick={onClick}
-        />
+        <Pins data={pinData.features} onClick={onClick} />
       </Source>
     </ReactMapGL>
+  );
+}
+
+/**
+ * Modal for showing information about a specific POI.
+ * @param {object} selectedLocation The POI data.
+ * @param {function} onClose Callback to be executed when the modal is closed.
+ */
+function POIModal({ selectedLocation, onClose }) {
+  const dialogTitleRef = React.useRef(null);
+  return (
+    <Dialog
+      as="div"
+      className="fixed inset-0 z-10 overflow-y-auto"
+      onClose={onClose}
+      open={!!selectedLocation}
+      initialFocus={dialogTitleRef}
+    >
+      <Transition
+        appear
+        enter="ease-out duration-300"
+        enterFrom="opacity-0"
+        enterTo="opacity-100"
+        show={!!selectedLocation}
+        as={React.Fragment}
+      >
+        <div className="min-h-screen px-4 text-center bg-white bg-opacity-50">
+          <Transition.Child
+            as={React.Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+          >
+            <Dialog.Overlay className="fixed inset-0" />
+          </Transition.Child>
+
+          <span
+            className="inline-block h-screen align-middle"
+            aria-hidden="true"
+          >
+            &#8203;
+          </span>
+          <Transition.Child
+            as={React.Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+          >
+            <div className="inline-block w-full max-w-xl p-6 my-0 md:my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl">
+              <Dialog.Title
+                as="h3"
+                className="text-xl font-bold font-medium leading-6 text-gray-900"
+              >
+                <div
+                  className="flex cols-2 justify-between"
+                  ref={dialogTitleRef}
+                >
+                  <div>
+                    <span
+                      className={`font-semibold text-sm uppercase text-${
+                        CATEGORY_COLOR_MAP[selectedLocation?.category?.pk]
+                      }-400`}
+                    >
+                      {selectedLocation?.category?.label_singular}
+                    </span>
+                    <div>{selectedLocation?.name}</div>
+                  </div>
+                  <div className="flex">
+                    <XCircleIcon
+                      type="button"
+                      className="cursor-pointer justify-center h-8 w-8 hover:text-red-500 text-gray-500 focus:outline-none"
+                      onClick={onClose}
+                    />
+                  </div>
+                </div>
+              </Dialog.Title>
+              <div className="mt-2">
+                <p className="text-sm text-gray-500">
+                  {selectedLocation?.description}
+                </p>
+              </div>
+
+              <div className="mt-4 text-md">
+                {selectedLocation?.address && (
+                  <div className="flex font-semibold text-gray-600">
+                    <LocationMarkerIcon className="h-5 mr-2" />
+                    <div>{selectedLocation.address}</div>
+                  </div>
+                )}
+                <div>{selectedLocation?.description}</div>
+                <div>{selectedLocation?.email}</div>
+                {selectedLocation?.website && (
+                  <div className="flex text-blue-600">
+                    <LinkIcon className="h-5 mr-2" />
+                    <a href={selectedLocation.website}>
+                      {selectedLocation.website}
+                    </a>
+                  </div>
+                )}
+              </div>
+            </div>
+          </Transition.Child>
+        </div>
+      </Transition>
+    </Dialog>
   );
 }
 
@@ -178,99 +283,29 @@ function Map({ locations, onClick }) {
  * Map which displays a small modal with POI details when a pin is clicked.
  * @param {object} data The POI data as GeoJSON object.
  */
-function ModalMap({ data }) {
+function ModalMap({ data, category }) {
+  const [features, setFeatures] = React.useState(data.features);
   const [selectedLocation, setSelectedLocation] = React.useState(null);
-  const dialogTitleRef = React.useRef(null)
-
-  function closeModal() {
-    setSelectedLocation(null);
-  }
+  React.useEffect(() => {
+    if (!category) return;
+    setFeatures(
+      data.features.filter(
+        (feature) => feature.properties.category.pk == category.pk
+      )
+    );
+  }, [category]);
 
   return (
     <>
-      <Map locations={data} onClick={(feature) => setSelectedLocation(feature.properties)} />
-
-        <Dialog
-          as="div"
-          className="fixed inset-0 z-10 overflow-y-auto"
-          onClose={closeModal}
-          open={!!selectedLocation}
-          initialFocus={dialogTitleRef}
-        >
-          <Transition
-            appear
-            show={!!selectedLocation}
-            as={React.Fragment}
-          >
-            <div className="min-h-screen px-4 text-center">
-              <Transition.Child
-                as={React.Fragment}
-                enter="ease-out duration-300"
-                enterFrom="opacity-0"
-                enterTo="opacity-100"
-              >
-                <Dialog.Overlay className="fixed inset-0" />
-              </Transition.Child>
-
-              <span
-                className="inline-block h-screen align-middle"
-                aria-hidden="true"
-              >
-                &#8203;
-              </span>
-              <Transition.Child
-                as={React.Fragment}
-                enter="ease-out duration-300"
-                enterFrom="opacity-0"
-                enterTo="opacity-100"
-              >
-                <div className="inline-block w-full max-w-xl p-6 my-0 md:my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl">
-                  <Dialog.Title
-                    as="h3"
-                    className="text-xl font-bold font-medium leading-6 text-gray-900"
-                  >
-                    <div
-                      className="flex cols-2 justify-between"
-                      ref={dialogTitleRef}
-                    >
-                      <div>
-                        <span
-                          className={`font-semibold text-sm uppercase text-${
-                            CATEGORY_COLOR_MAP[selectedLocation?.category?.pk]
-                          }-400`}
-                        >
-                          {selectedLocation?.category?.label_singular}
-                        </span>
-                        <div>{selectedLocation?.name}</div>
-                      </div>
-                      <div className="flex">
-                        <button
-                          type="button"
-                          className="justify-center h-8 w-8 text-lg font-bold text-gray-600 bg-gray-100 border border-transparent rounded-3xl hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-red-500"
-                          onClick={closeModal}
-                        >
-                          x
-                        </button>
-                      </div>
-                    </div>
-                  </Dialog.Title>
-                  <div className="mt-2">
-                    <p className="text-sm text-gray-500">
-                      {selectedLocation?.description}
-                    </p>
-                  </div>
-
-                  <div className="mt-4">
-                    <div>{selectedLocation?.address}</div>
-                    <div>{selectedLocation?.description}</div>
-                    <div>{selectedLocation?.email}</div>
-                    <a href={selectedLocation?.website}>{selectedLocation?.website}</a>
-                  </div>
-                </div>
-              </Transition.Child>
-            </div>
-          </Transition>
-        </Dialog>
+      <Map
+        height="100%"
+        locations={{ ...data, features }}
+        onClick={(feature) => setSelectedLocation(feature.properties)}
+      />
+      <POIModal
+        selectedLocation={selectedLocation}
+        onClose={() => setSelectedLocation(null)}
+      />
     </>
   );
 }

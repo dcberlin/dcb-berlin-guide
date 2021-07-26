@@ -25,7 +25,7 @@ export default function Select({ data, onSelect }) {
             leaveFrom="translate-x-0"
             leaveTo="translate-x-full"
           >
-            <Listbox.Options className="fixed bottom-20 py-1 mt-1 overflow-auto text-base bg-white shadow-lg max-h-100 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+            <Listbox.Options className="fixed bottom-20 py-1 mt-1 overflow-auto text-base bg-white shadow-lg max-h-90 z-20 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
               {data.map((item, itemIdx) => (
                 <Listbox.Option
                   key={itemIdx}

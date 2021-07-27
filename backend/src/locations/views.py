@@ -11,5 +11,5 @@ class LocationViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Category.objects.all()
+    queryset = Category.objects.all().order_by("label_plural")
     serializer_class = CategorySerializer

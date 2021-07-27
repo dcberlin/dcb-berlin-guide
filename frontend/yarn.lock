@@ -1288,6 +1288,11 @@
   resolved "https://registry.yarnpkg.com/@headlessui/react/-/react-1.2.0.tgz#e48652bfce82ddf73d7f331faeb9db6526ee6874"
   integrity sha512-19DkLz8gDgbi+WvkoTzi9vs0NK9TJf94vbYhMzB4LYJo03Kili0gmvXT9CiKZoxXZ7YAvy/b1U1oQKEnjWrqxw==
 
+"@heroicons/react@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@heroicons/react/-/react-1.0.2.tgz#e44a25d139e6fc8f94f4b146aeebad8f9af3d7dc"
+  integrity sha512-4FqozK7QCwyYTTWgtmG+Sffo20arFzIXuzY6TnsShNIPBRn6FKK/CuaYorVkNogxk7FW8MdOvSnpMPQpNeA04g==
+
 "@istanbuljs/load-nyc-config@^1.0.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@istanbuljs/load-nyc-config/-/load-nyc-config-1.1.0.tgz#fd3db1d59ecf7cf121e80650bb86712f9b55eced"
@@ -1727,7 +1732,8 @@
     "@svgr/plugin-svgo" "^5.5.0"
     loader-utils "^2.0.0"
 
-"@tailwindcss/postcss7-compat@^2.0.4", tailwindcss@^2.0.4, "tailwindcss@npm:@tailwindcss/postcss7-compat":
+"@tailwindcss/postcss7-compat@^2.0.4", "tailwindcss@npm:@tailwindcss/postcss7-compat":
+  name tailwindcss
   version "2.1.4"
   resolved "https://registry.yarnpkg.com/@tailwindcss/postcss7-compat/-/postcss7-compat-2.1.4.tgz#427a2fd1837a3d9a54a296cc8b86a3f76b1452a7"
   integrity sha512-KYRj/AGNwE4tPf02IvT+J36Twlrwg/OJJuSckSupX2T+xIOHSXPugNJZ7Stn9F67hh/qH+2Y2HXK6vpBadW6qw==
@@ -4058,6 +4064,11 @@ cyclist@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/cyclist/-/cyclist-1.0.1.tgz#596e9698fd0c80e12038c2b82d6eb1b35b6224d9"
   integrity sha1-WW6WmP0MgOEgOMK4LW6xs1tiJNk=
+
+d3-ease@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/d3-ease/-/d3-ease-3.0.1.tgz#9658ac38a2140d59d346160f1f6c30fda0bd12f4"
+  integrity sha512-wR/XK3D3XcLIZwpbvQwQ5fK+8Ykds1ip7A2Txe0yxncXSdq1L9skcG7blcedkOX+ZcgxGAmLX1FrRGbADwzi0w==
 
 d@1, d@^1.0.1:
   version "1.0.1"

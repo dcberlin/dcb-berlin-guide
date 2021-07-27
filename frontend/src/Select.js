@@ -1,6 +1,8 @@
 import { Fragment, useState } from "react";
 import { Listbox, Transition } from "@headlessui/react";
-import { CheckIcon } from "@heroicons/react/solid";
+import { LocationMarkerIcon } from "@heroicons/react/solid";
+
+import { CATEGORY_COLOR_MAP } from "./constants";
 
 export default function Select({ data, onSelect }) {
   const [selected, setSelected] = useState(data[0]);
@@ -14,8 +16,15 @@ export default function Select({ data, onSelect }) {
       {({ open }) => (
         <div className="mt-1">
           <Listbox.Button className="relative w-56 py-4 pl-6 pr-10 text-left bg-white shadow-md cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm">
-            <span className="block truncate uppercase text-sm font-semibold">
+            <span className="truncate uppercase text-sm font-semibold pl-4">
               {selected.label_plural}
+            </span>
+            <span className="absolute inset-y-0 left-0 flex items-center pl-3">
+              <LocationMarkerIcon
+                className="w-5 h-5"
+                aria-hidden="true"
+                style={{ color: CATEGORY_COLOR_MAP[selected.pk] }}
+              />
             </span>
           </Listbox.Button>
           <Transition
@@ -32,8 +41,8 @@ export default function Select({ data, onSelect }) {
                   className={({ selected, active }) =>
                     `${
                       selected || active
-                        ? "text-black bg-red-50"
-                        : "text-gray-700"
+                        ? "text-black bg-gray-100"
+                        : "text-gray-500"
                     }
                             cursor-pointer select-none relative py-2 pl-10 pr-4`
                   }
@@ -44,11 +53,13 @@ export default function Select({ data, onSelect }) {
                       <span className="uppercase text-sm font-semibold">
                         {item.label_plural}
                       </span>
-                      {selected ? (
-                        <span className="text-red-600 absolute inset-y-0 left-0 flex items-center pl-3">
-                          <CheckIcon className="w-5 h-5" aria-hidden="true" />
-                        </span>
-                      ) : null}
+                      <span className="absolute inset-y-0 left-0 flex items-center pl-3">
+                        <LocationMarkerIcon
+                          className="w-5 h-5"
+                          aria-hidden="true"
+                          style={{ color: CATEGORY_COLOR_MAP[item.pk] }}
+                        />
+                      </span>
                     </>
                   )}
                 </Listbox.Option>

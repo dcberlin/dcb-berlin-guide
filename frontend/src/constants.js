@@ -27,5 +27,5 @@ const API_URL = process.env.REACT_APP_API_URL;
 const ENDPOINTS = {
   LOCATIONS: `${API_URL}/api/locations/`,
   CATEGORIES: `${API_URL}/api/categories/`,
-}
+};
 export { CATEGORY_COLOR_MAP, MAPBOX_TOKEN, API_URL, ENDPOINTS };

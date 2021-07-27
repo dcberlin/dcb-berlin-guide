@@ -9,8 +9,6 @@ on:
     paths:
       - frontend/**
 
-  pull_request:
-
 env:
   FRONTEND_IMAGE_NAME: dcb_berlin_guide_frontend
 jobs:

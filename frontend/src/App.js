@@ -81,6 +81,12 @@ function Home() {
     data: locationData,
   } = useQuery("locations", fetchLocations);
 
+  function onSelectCategory(category) {
+    category.pk == 0
+      ? setSelectedCategory(null)
+      : setSelectedCategory(category);
+  }
+
   if (locationIsLoading || categoryIsLoading) return <div>Loading...</div>;
   if (locationError || categoryError)
     return (
@@ -95,10 +101,7 @@ function Home() {
       <div className="absolute inset-0">
         <ModalMap data={locationData} category={selectedCategory} />
         <div className="absolute bottom-20 right-0">
-          <Select
-            data={categoryData}
-            onSelect={(category) => setSelectedCategory(category)}
-          />
+          <Select data={categoryData} onSelect={onSelectCategory} />
         </div>
       </div>
     </>
@@ -279,12 +282,12 @@ function ModalMap({ data, category }) {
   const [features, setFeatures] = React.useState(data.features);
   const [selectedLocation, setSelectedLocation] = React.useState(null);
   React.useEffect(() => {
-    if (!category) return;
-    setFeatures(
-      data.features.filter(
-        (feature) => feature.properties.category.pk == category.pk
-      )
-    );
+    const newFeatures = !category
+      ? data.features
+      : data.features.filter(
+          (feature) => feature.properties.category.pk == category.pk
+        );
+    setFeatures(newFeatures);
   }, [category]);
 
   return (

@@ -16,7 +16,7 @@ export default function Select({ data, onSelect }) {
     <Listbox value={selected} onChange={onChange}>
       {({ open }) => (
         <div className="mt-1">
-          <Listbox.Button className="relative w-56 py-4 pl-6 pr-10 text-left bg-white shadow-md cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm">
+          <Listbox.Button className="relative w-56 py-4 pl-6 pr-10 text-left bg-white shadow-md cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm rounded-l-2xl">
             <span className="truncate uppercase text-sm font-semibold pl-4">
               {selected.label_plural}
             </span>
@@ -39,7 +39,7 @@ export default function Select({ data, onSelect }) {
             leaveFrom="translate-x-0"
             leaveTo="translate-x-full"
           >
-            <Listbox.Options className="fixed bottom-20 py-1 mt-1 overflow-auto text-base bg-white shadow-lg max-h-90 z-20 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+            <Listbox.Options className="fixed bottom-20 py-1 mt-1 overflow-auto text-base bg-white shadow-lg max-h-90 z-20 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm rounded-l-2xl">
               {categories.map((item, itemIdx) => (
                 <Listbox.Option
                   key={itemIdx}

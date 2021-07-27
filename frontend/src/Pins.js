@@ -11,8 +11,8 @@ const SIZE = 25;
 
 /**
  * Pins for representing POIs across all categories.
- * @param {array} All locations to be represented by the pins, as GeoJSON features.
- * @param {function} Callback for a click event on a pin.
+ * @param {array} data All locations to be represented by the pins, as GeoJSON features.
+ * @param {function} onClick Callback for a click event on a pin.
  */
 function Pins({ data, onClick }) {
   return data.map((location, index) => {

@@ -1,6 +1,6 @@
 # The DCB Berlin Guide
 
-_This project is currently just a proof of concept. It partially lacks functionality, sufficient testing coverage and proper frontend architecture._
+_This project is currently in a prototype phase. It partially lacks functionality, sufficient testing coverage and proper frontend architecture._
 
 The Berlin Guide created by [DCB](https://diasporacivica.berlin) aims to be the online gateway for members of the Romanian community in Berlin.
 Its goal is to provide clear information on places of interest and services in demand among the Romanian diaspora in the city and its surroundings.

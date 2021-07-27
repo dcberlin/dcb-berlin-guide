@@ -43,19 +43,6 @@ function Routes() {
 
   return (
     <Router>
-      <div className="relative z-20">
-        <div className="bg-red-500 h-8"></div>
-        <div className="flex items-center justify-center gap-4 sm:gap-32 p-6 bg-opacity-40 bg-white">
-          <Link to="/">
-            <h1 className="font-bold text-xl w-full md:w-max uppercase">
-              Harta diasporei <br /> din Berlin
-            </h1>
-          </Link>
-          <a className="w-32" href="https://diasporacivica.berlin">
-            <img alt="Logo of Diaspora Civica Berlin" src={dcbLogo} />
-          </a>
-        </div>
-      </div>
       <Switch>
         <Route path="/">
           <Home />
@@ -70,6 +57,7 @@ function Routes() {
  */
 function Home() {
   const [selectedCategory, setSelectedCategory] = React.useState(null);
+  const [displayHeader, setDisplayHeader] = React.useState(true);
   const {
     isLoading: categoryIsLoading,
     error: categoryError,
@@ -98,8 +86,31 @@ function Home() {
 
   return (
     <>
+      <div
+        className={`relative z-20 transition duration-300 ease-in-out opacity-${
+          displayHeader ? 100 : 0
+        }`}
+      >
+        <div className="bg-red-500 h-8"></div>
+        <div className="flex items-center justify-center gap-4 sm:gap-32 p-6 bg-opacity-40 bg-white">
+          <Link to="/">
+            <h1 className="font-bold text-xl w-full md:w-max uppercase">
+              Harta diasporei <br /> din Berlin
+            </h1>
+          </Link>
+          <a className="w-32" href="https://diasporacivica.berlin">
+            <img alt="Logo of Diaspora Civica Berlin" src={dcbLogo} />
+          </a>
+        </div>
+      </div>
       <div className="absolute inset-0">
-        <ModalMap data={locationData} category={selectedCategory} />
+        <ModalMap
+          data={locationData}
+          category={selectedCategory}
+          onSelectLocation={(location) => {
+            setDisplayHeader(!location);
+          }}
+        />
         <div className="absolute bottom-20 right-0">
           <Select data={categoryData} onSelect={onSelectCategory} />
         </div>
@@ -125,7 +136,7 @@ function Map({ locations, onClick }) {
     setViewport({
       ...viewport,
       longitude: feature.geometry.coordinates[0],
-      latitude: feature.geometry.coordinates[1] - 0.001,
+      latitude: feature.geometry.coordinates[1] - 0.004,
       zoom: 13,
       transitionDuration: 1500,
       transitionInterpolator: new FlyToInterpolator(),
@@ -276,8 +287,10 @@ function POIModal({ selectedLocation, onClose }) {
 /**
  * Map which displays a small modal with POI details when a pin is clicked.
  * @param {object} data The POI data as GeoJSON object.
+ * @param {object} category The selected category.
+ * @param {function} onSelectLocation Callback for a location change event.
  */
-function ModalMap({ data, category }) {
+function ModalMap({ data, category, onSelectLocation }) {
   const [features, setFeatures] = React.useState(data.features);
   const [selectedLocation, setSelectedLocation] = React.useState(null);
   React.useEffect(() => {
@@ -288,13 +301,16 @@ function ModalMap({ data, category }) {
         );
     setFeatures(newFeatures);
   }, [category]);
+  React.useEffect(() => onSelectLocation(selectedLocation), [selectedLocation]);
 
   return (
     <>
       <Map
         height="100%"
         locations={{ ...data, features }}
-        onClick={(feature) => setSelectedLocation(feature.properties)}
+        onClick={(feature) => {
+          setSelectedLocation(feature.properties);
+        }}
       />
       <POIModal
         selectedLocation={selectedLocation}

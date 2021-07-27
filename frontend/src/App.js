@@ -177,7 +177,7 @@ function POIModal({ selectedLocation, onClose }) {
   return (
     <Dialog
       as="div"
-      className="fixed inset-0 z-40 overflow-y-auto"
+      className="fixed bottom-0 z-40 overflow-y-auto"
       onClose={onClose}
       open={!!selectedLocation}
       initialFocus={dialogTitleRef}
@@ -197,16 +197,7 @@ function POIModal({ selectedLocation, onClose }) {
             enterFrom="opacity-0"
             enterTo="opacity-100"
           >
-            <Dialog.Overlay className="fixed inset-0" />
-          </Transition.Child>
-
-          <Transition.Child
-            as={React.Fragment}
-            enter="ease-out duration-300"
-            enterFrom="opacity-0"
-            enterTo="opacity-100"
-          >
-            <div className="absolute bottom-0 w-full max-h-80 sm:max-h-auto p-6 my-0 text-left align-bottom transition-all transform bg-white shadow-xl overflow-y-scroll sm:overflow-hidden mt-4 sm:p-10">
+            <div className="w-screen max-h-100 sm:max-h-auto p-6 my-0 text-left align-bottom transition-all transform bg-white shadow-xl overflow-y-scroll sm:overflow-hidden mt-4 sm:p-10">
               <Dialog.Title
                 as="h3"
                 className="text-xl font-bold font-medium leading-6 text-gray-900"

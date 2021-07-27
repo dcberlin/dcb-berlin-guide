@@ -215,16 +215,16 @@ function POIModal({ selectedLocation, onClose }) {
 
               <div className="mt-4 text-md">
                 {selectedLocation?.address && (
-                  <div className="flex font-semibold text-gray-600">
-                    <LocationMarkerIcon className="h-5 mr-2" />
+                  <div className="flex items-center font-semibold text-gray-600">
+                    <LocationMarkerIcon className="flex-none inline h-5 w-5 mr-2" />
                     <div>{selectedLocation.address}</div>
                   </div>
                 )}
                 <div>{selectedLocation?.description}</div>
                 <div>{selectedLocation?.email}</div>
                 {selectedLocation?.website && (
-                  <div className="flex text-blue-600">
-                    <LinkIcon className="h-5 mr-2" />
+                  <div className="flex items-center text-blue-600">
+                    <LinkIcon className="flex-none h-5 w-5 mr-2" />
                     <a href={selectedLocation.website}>
                       {selectedLocation.website}
                     </a>

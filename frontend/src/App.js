@@ -4,9 +4,14 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { QueryClient, QueryClientProvider, useQuery } from "react-query";
 import { Dialog, Transition } from "@headlessui/react";
 import { XCircleIcon } from "@heroicons/react/outline";
-import { LocationMarkerIcon, LinkIcon } from "@heroicons/react/solid";
+import {
+  LocationMarkerIcon,
+  LinkIcon,
+  MailIcon,
+  PhoneIcon,
+} from "@heroicons/react/solid";
 
-import { CATEGORY_COLOR_MAP, MAPBOX_TOKEN, ENDPOINTS } from "./constants";
+import { MAPBOX_TOKEN } from "./constants";
 import { fetchCategories, fetchLocations } from "./utils";
 import Pins from "./Pins";
 import Select from "./Select";
@@ -144,7 +149,7 @@ function POIModal({ selectedLocation, onClose }) {
   return (
     <Dialog
       as="div"
-      className="fixed inset-0 z-10 overflow-y-auto"
+      className="fixed inset-0 z-40 overflow-y-auto"
       onClose={onClose}
       open={!!selectedLocation}
       initialFocus={dialogTitleRef}
@@ -189,11 +194,7 @@ function POIModal({ selectedLocation, onClose }) {
                   ref={dialogTitleRef}
                 >
                   <div>
-                    <span
-                      className={`font-semibold text-sm uppercase text-${
-                        CATEGORY_COLOR_MAP[selectedLocation?.category?.pk]
-                      }-400`}
-                    >
+                    <span className="font-semibold text-sm uppercase text-gray-500">
                       {selectedLocation?.category?.label_singular}
                     </span>
                     <div>{selectedLocation?.name}</div>
@@ -207,11 +208,6 @@ function POIModal({ selectedLocation, onClose }) {
                   </div>
                 </div>
               </Dialog.Title>
-              <div className="mt-2">
-                <p className="text-sm text-gray-500">
-                  {selectedLocation?.description}
-                </p>
-              </div>
 
               <div className="mt-4 text-md">
                 {selectedLocation?.address && (
@@ -220,16 +216,37 @@ function POIModal({ selectedLocation, onClose }) {
                     <div>{selectedLocation.address}</div>
                   </div>
                 )}
-                <div>{selectedLocation?.description}</div>
-                <div>{selectedLocation?.email}</div>
+                {selectedLocation?.email && (
+                  <div className="flex items-center">
+                    <MailIcon className="flex-none h-5 w-5 mr-2 text-gray-600" />
+                    <a
+                      href={`mailto://${selectedLocation.email}`}
+                      className="text-blue-600"
+                    >
+                      {selectedLocation.email}
+                    </a>
+                  </div>
+                )}
+                {selectedLocation?.phone && (
+                  <div className="flex items-center text-gray-600">
+                    <PhoneIcon className="flex-none h-5 w-5 mr-2" />
+                    <div>{selectedLocation.phone}</div>
+                  </div>
+                )}
                 {selectedLocation?.website && (
-                  <div className="flex items-center text-blue-600">
-                    <LinkIcon className="flex-none h-5 w-5 mr-2" />
-                    <a href={selectedLocation.website}>
+                  <div className="flex items-center">
+                    <LinkIcon className="flex-none h-5 w-5 mr-2 text-gray-600" />
+                    <a
+                      href={selectedLocation.website}
+                      className="text-blue-600"
+                    >
                       {selectedLocation.website}
                     </a>
                   </div>
                 )}
+              </div>
+              <div className="mt-4">
+                <p className="text-lg">{selectedLocation?.description}</p>
               </div>
             </div>
           </Transition.Child>

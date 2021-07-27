@@ -1,11 +1,12 @@
 import { Fragment, useState } from "react";
 import { Listbox, Transition } from "@headlessui/react";
-import { LocationMarkerIcon } from "@heroicons/react/solid";
+import { LocationMarkerIcon, MapIcon } from "@heroicons/react/solid";
 
 import { CATEGORY_COLOR_MAP } from "./constants";
 
 export default function Select({ data, onSelect }) {
-  const [selected, setSelected] = useState(data[0]);
+  const categories = [{ pk: 0, label_plural: "Toate Categoriile" }, ...data];
+  const [selected, setSelected] = useState(categories[0]);
   function onChange(item) {
     setSelected(item);
     onSelect(item);
@@ -20,11 +21,15 @@ export default function Select({ data, onSelect }) {
               {selected.label_plural}
             </span>
             <span className="absolute inset-y-0 left-0 flex items-center pl-3">
-              <LocationMarkerIcon
-                className="w-5 h-5"
-                aria-hidden="true"
-                style={{ color: CATEGORY_COLOR_MAP[selected.pk] }}
-              />
+              {selected.pk !== 0 ? (
+                <LocationMarkerIcon
+                  className="w-5 h-5"
+                  aria-hidden="true"
+                  style={{ color: CATEGORY_COLOR_MAP[selected.pk] }}
+                />
+              ) : (
+                <MapIcon className="w-5 h-5 text-gray-700" aria-hidden="true" />
+              )}
             </span>
           </Listbox.Button>
           <Transition
@@ -35,7 +40,7 @@ export default function Select({ data, onSelect }) {
             leaveTo="translate-x-full"
           >
             <Listbox.Options className="fixed bottom-20 py-1 mt-1 overflow-auto text-base bg-white shadow-lg max-h-90 z-20 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-              {data.map((item, itemIdx) => (
+              {categories.map((item, itemIdx) => (
                 <Listbox.Option
                   key={itemIdx}
                   className={({ selected, active }) =>
@@ -48,20 +53,23 @@ export default function Select({ data, onSelect }) {
                   }
                   value={item}
                 >
-                  {({ selected, active }) => (
-                    <>
-                      <span className="uppercase text-sm font-semibold">
-                        {item.label_plural}
-                      </span>
-                      <span className="absolute inset-y-0 left-0 flex items-center pl-3">
-                        <LocationMarkerIcon
-                          className="w-5 h-5"
-                          aria-hidden="true"
-                          style={{ color: CATEGORY_COLOR_MAP[item.pk] }}
-                        />
-                      </span>
-                    </>
-                  )}
+                  <span className="uppercase text-sm font-semibold">
+                    {item.label_plural}
+                  </span>
+                  <span className="absolute inset-y-0 left-0 flex items-center pl-3">
+                    {item.pk !== 0 ? (
+                      <LocationMarkerIcon
+                        className="w-5 h-5"
+                        aria-hidden="true"
+                        style={{ color: CATEGORY_COLOR_MAP[item.pk] }}
+                      />
+                    ) : (
+                      <MapIcon
+                        className="w-5 h-5 text-gray-700"
+                        aria-hidden="true"
+                      />
+                    )}
+                  </span>
                 </Listbox.Option>
               ))}
             </Listbox.Options>

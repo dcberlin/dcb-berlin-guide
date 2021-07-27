@@ -190,7 +190,7 @@ function POIModal({ selectedLocation, onClose }) {
         show={!!selectedLocation}
         as={React.Fragment}
       >
-        <div className="min-h-screen">
+        <div>
           <Transition.Child
             as={React.Fragment}
             enter="ease-out duration-300"
@@ -200,19 +200,13 @@ function POIModal({ selectedLocation, onClose }) {
             <Dialog.Overlay className="fixed inset-0" />
           </Transition.Child>
 
-          <span
-            className="inline-block h-screen align-middle"
-            aria-hidden="true"
-          >
-            &#8203;
-          </span>
           <Transition.Child
             as={React.Fragment}
             enter="ease-out duration-300"
             enterFrom="opacity-0"
             enterTo="opacity-100"
           >
-            <div className="inline-block w-full max-h-80 sm:max-h-auto p-6 my-0 text-left align-bottom transition-all transform bg-white shadow-xl overflow-y-scroll sm:overflow-hidden mt-4 sm:p-10">
+            <div className="absolute bottom-0 w-full max-h-80 sm:max-h-auto p-6 my-0 text-left align-bottom transition-all transform bg-white shadow-xl overflow-y-scroll sm:overflow-hidden mt-4 sm:p-10">
               <Dialog.Title
                 as="h3"
                 className="text-xl font-bold font-medium leading-6 text-gray-900"

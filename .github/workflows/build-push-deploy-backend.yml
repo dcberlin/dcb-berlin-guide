@@ -9,8 +9,6 @@ on:
     paths:
       - backend/**
 
-  pull_request:
-
 env:
   BACKEND_IMAGE_NAME: dcb_berlin_guide_backend
 jobs:

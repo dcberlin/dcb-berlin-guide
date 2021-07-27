@@ -24,4 +24,5 @@ class LocationSerializer(GeoFeatureModelSerializer):
             "email",
             "description",
             "category",
+            "phone",
         ]

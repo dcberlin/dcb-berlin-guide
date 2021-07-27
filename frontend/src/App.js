@@ -131,7 +131,6 @@ function Map({ locations, onClick }) {
       transitionInterpolator: new FlyToInterpolator(),
       transitionEasing: easeCubic,
     });
-    console.log({ feature });
   }
 
   let pinData = {};

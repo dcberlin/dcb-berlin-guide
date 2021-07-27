@@ -1,5 +1,5 @@
 import * as React from "react";
-import ReactMapGL, { Source } from "react-map-gl";
+import ReactMapGL, { Source, FlyToInterpolator } from "react-map-gl";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { QueryClient, QueryClientProvider, useQuery } from "react-query";
 import { Dialog, Transition } from "@headlessui/react";
@@ -10,6 +10,7 @@ import {
   MailIcon,
   PhoneIcon,
 } from "@heroicons/react/solid";
+import { easeCubic } from "d3-ease";
 
 import { MAPBOX_TOKEN } from "./constants";
 import { fetchCategories, fetchLocations } from "./utils";
@@ -44,7 +45,7 @@ function Routes() {
     <Router>
       <div className="relative z-20">
         <div className="bg-red-500 h-8"></div>
-        <div className="flex items-center justify-center gap-4 sm:gap-32 p-8 bg-opacity-40 bg-white">
+        <div className="flex items-center justify-center gap-4 sm:gap-32 p-6 bg-opacity-40 bg-white">
           <Link to="/">
             <h1 className="font-bold text-xl w-full md:w-max uppercase">
               Harta diasporei <br /> din Berlin
@@ -116,6 +117,20 @@ function Map({ locations, onClick }) {
     zoom: 11.1,
   });
 
+  function onSelectPin(feature) {
+    onClick(feature);
+    setViewport({
+      ...viewport,
+      longitude: feature.geometry.coordinates[0],
+      latitude: feature.geometry.coordinates[1] - 0.001,
+      zoom: 13,
+      transitionDuration: 1500,
+      transitionInterpolator: new FlyToInterpolator(),
+      transitionEasing: easeCubic,
+    });
+    console.log({ feature });
+  }
+
   let pinData = {};
   if (locations.features) {
     pinData = {
@@ -133,7 +148,7 @@ function Map({ locations, onClick }) {
       mapboxApiAccessToken={MAPBOX_TOKEN}
     >
       <Source id="my-data" type="geojson" data={pinData}>
-        <Pins data={pinData.features} onClick={onClick} />
+        <Pins data={pinData.features} onClick={onSelectPin} />
       </Source>
     </ReactMapGL>
   );
@@ -162,7 +177,7 @@ function POIModal({ selectedLocation, onClose }) {
         show={!!selectedLocation}
         as={React.Fragment}
       >
-        <div className="min-h-screen px-4 text-center bg-white bg-opacity-50">
+        <div className="min-h-screen">
           <Transition.Child
             as={React.Fragment}
             enter="ease-out duration-300"
@@ -184,7 +199,7 @@ function POIModal({ selectedLocation, onClose }) {
             enterFrom="opacity-0"
             enterTo="opacity-100"
           >
-            <div className="inline-block w-full max-w-xl p-6 my-0 md:my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl">
+            <div className="inline-block w-full max-h-80 sm:max-h-auto p-6 my-0 text-left align-bottom transition-all transform bg-white shadow-xl overflow-y-scroll sm:overflow-hidden mt-4 sm:p-10">
               <Dialog.Title
                 as="h3"
                 className="text-xl font-bold font-medium leading-6 text-gray-900"

@@ -11,7 +11,8 @@ RUN yarn
 COPY . ./
 RUN yarn build
 
-FROM nginx:1.12-alpine
+FROM nginx:1.21.1
+RUN apt-get update && apt-get install -y curl
 COPY --from=built-client /usr/src/app/build /usr/share/nginx/html
 COPY --from=built-client /usr/src/app/nginx.conf /etc/nginx/conf.d/default.conf
 EXPOSE 80

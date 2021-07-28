@@ -24,7 +24,7 @@ services:
       SECRET_KEY: "${SECRET_KEY}"
     deploy:
       mode: replicated
-      replicas: 2
+      replicas: 1
       update_config:
         failure_action: rollback
         parallelism: 1
@@ -38,7 +38,16 @@ services:
         - "traefik.http.routers.api.rule=Host(`${BERLIN_GUIDE_DOMAIN?Variable not set}`) && PathPrefix(`/api/`) || PathPrefix(`/admin/`) || PathPrefix(`/django-static/`)"
         - "traefik.http.routers.api.entrypoints=http"
         - "traefik.http.services.api.loadbalancer.server.port=8000"
-        - "traefik.docker.network=berlin-guide_default"
+        - "traefik.docker.network=traefik-public"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - traefik-public
+      - default
 
   webapp:
     image: "ghcr.io/03b8/dcb_berlin_guide_frontend:${TAG:-latest}"
@@ -46,7 +55,7 @@ services:
       - api
     deploy:
       mode: replicated
-      replicas: 2
+      replicas: 1
       update_config:
         failure_action: rollback
         parallelism: 1
@@ -60,7 +69,16 @@ services:
         - "traefik.http.routers.webapp.rule=Host(`${BERLIN_GUIDE_DOMAIN?Variable not set}`) && PathPrefix(`/`) "
         - "traefik.http.routers.webapp.entrypoints=http"
         - "traefik.http.services.webapp.loadbalancer.server.port=80"
-        - "traefik.docker.network=berlin-guide_default"
+        - "traefik.docker.network=traefik-public"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - traefik-public
+      - default
 
   reverse-proxy:
     image: "traefik:v2.4"
@@ -75,7 +93,7 @@ services:
         - "traefik.enable=true"
         - "traefik.http.routers.reverse-proxy.rule=Host(`${BERLIN_GUIDE_DOMAIN?Variable not set}`)"
         - "traefik.http.services.reverse-proxy.loadbalancer.server.port=80"
-        - "traefik.docker.network=berlin-guide_default"
+        - "traefik.docker.network=traefik-public"
 
     command:
       - "--providers.docker"
@@ -89,3 +107,10 @@ services:
         mode: host
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    networks:
+      - traefik-public
+
+networks:
+  traefik-public:
+    name: traefik-public
+    external: true

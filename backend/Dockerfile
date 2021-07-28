@@ -4,6 +4,8 @@ WORKDIR /backend
 COPY . /backend
 
 RUN : \
+  && apt-get update \
+  && apt-get install -y curl \
   && pip install --no-cache-dir --upgrade pip \
   && pip install --no-cache-dir poetry~=1.1.6 \
   && pip install gunicorn \

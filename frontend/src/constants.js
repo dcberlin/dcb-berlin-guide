@@ -1,5 +1,5 @@
 const distinctColors = [
-  "#a6cee3",
+  "#d9d205",
   "#1f78b4",
   "#b2df8a",
   "#33a02c",

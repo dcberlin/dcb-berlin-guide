@@ -1,6 +1,12 @@
 import * as React from "react";
 import ReactMapGL, { Source, FlyToInterpolator } from "react-map-gl";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useHistory,
+} from "react-router-dom";
 import { QueryClient, QueryClientProvider, useQuery } from "react-query";
 import { Dialog, Transition } from "@headlessui/react";
 import { XCircleIcon } from "@heroicons/react/outline";
@@ -13,7 +19,7 @@ import {
 import { easeCubic } from "d3-ease";
 
 import { MAPBOX_TOKEN } from "./constants";
-import { fetchCategories, fetchLocations } from "./utils";
+import { fetchCategories, fetchLocations, useQueryParams } from "./utils";
 import Pins from "./Pins";
 import Select from "./Select";
 import dcbLogo from "./images/dcbLogo.png";
@@ -58,6 +64,10 @@ function Routes() {
 function Home() {
   const [selectedCategory, setSelectedCategory] = React.useState(null);
   const [displayHeader, setDisplayHeader] = React.useState(true);
+  const history = useHistory();
+  const query = useQueryParams();
+
+  const queryCategory = query.get("category");
   const {
     isLoading: categoryIsLoading,
     error: categoryError,
@@ -70,10 +80,24 @@ function Home() {
   } = useQuery("locations", fetchLocations);
 
   function onSelectCategory(category) {
-    category.pk == 0
-      ? setSelectedCategory(null)
-      : setSelectedCategory(category);
+    if (category.pk == 0) {
+      setSelectedCategory(null);
+      query.delete("category");
+    } else {
+      setSelectedCategory(category);
+      query.set("category", category.name_slug);
+    }
+    history.push({ search: query.toString() });
   }
+  React.useEffect(
+    () =>
+      setSelectedCategory(
+        categoryData.filter(
+          (category) => category.name_slug == queryCategory
+        )[0]
+      ),
+    [query, categoryData, queryCategory]
+  );
 
   if (locationIsLoading || categoryIsLoading) return <div>Loading...</div>;
   if (locationError || categoryError)
@@ -112,7 +136,11 @@ function Home() {
           }}
         />
         <div className="absolute bottom-20 right-0">
-          <Select data={categoryData} onSelect={onSelectCategory} />
+          <Select
+            data={categoryData}
+            onSelect={onSelectCategory}
+            selectedCategory={selectedCategory}
+          />
         </div>
       </div>
     </>

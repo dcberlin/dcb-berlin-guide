@@ -4,16 +4,16 @@ import { Listbox, Transition } from "@headlessui/react";
 import { LocationMarkerIcon, MapIcon } from "@heroicons/react/solid";
 
 import { CATEGORY_COLOR_MAP } from "./constants";
+import { useCategory } from "./contexts";
 
-export default function Select({ data, onSelect, selectedCategory = null }) {
+export default function Select({ data }) {
   const categories = [{ pk: 0, label_plural: "Toate Categoriile" }, ...data];
-  const [selected, setSelected] = useState(selectedCategory || categories[0]);
-  React.useEffect(() => setSelected(selectedCategory || categories[0]), [
-    selectedCategory,
-  ]);
+  const [category, setCategory] = useCategory();
+  const [selected, setSelected] = useState(category || categories[0]);
+  React.useEffect(() => category && setSelected(category), [category]);
   function onChange(item) {
+    setCategory(item);
     setSelected(item);
-    onSelect(item);
   }
 
   return (

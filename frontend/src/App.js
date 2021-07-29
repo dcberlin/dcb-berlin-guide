@@ -4,7 +4,6 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
   useHistory,
 } from "react-router-dom";
 import { QueryClient, QueryClientProvider, useQuery } from "react-query";
@@ -20,6 +19,12 @@ import { easeCubic } from "d3-ease";
 
 import { MAPBOX_TOKEN } from "./constants";
 import { fetchCategories, fetchLocations, useQueryParams } from "./utils";
+import {
+  CategoryProvider,
+  useCategory,
+  LocationProvider,
+  useLocation,
+} from "./contexts";
 import Pins from "./Pins";
 import Select from "./Select";
 import dcbLogo from "./images/dcbLogo.png";
@@ -34,7 +39,11 @@ const queryClient = new QueryClient();
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <Routes />
+      <CategoryProvider>
+        <LocationProvider>
+          <Routes />
+        </LocationProvider>
+      </CategoryProvider>
     </QueryClientProvider>
   );
 }
@@ -43,10 +52,6 @@ function App() {
  * Router component with header and routes for category pages.
  */
 function Routes() {
-  const { isLoading, error, data } = useQuery("categories", fetchCategories);
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>An error has occurred: {error.message}</div>;
-
   return (
     <Router>
       <Switch>
@@ -62,12 +67,14 @@ function Routes() {
  * Landing page, containing the map with all POIs and buttons leading to category pages.
  */
 function Home() {
-  const [selectedCategory, setSelectedCategory] = React.useState(null);
-  const [displayHeader, setDisplayHeader] = React.useState(true);
+  const [category, setCategory] = useCategory();
+  const [location, setLocation] = useLocation();
   const history = useHistory();
   const query = useQueryParams();
 
-  const queryCategory = query.get("category");
+  const queryCategorySlug = query.get("category");
+  const queryLocationPk = query.get("location");
+
   const {
     isLoading: categoryIsLoading,
     error: categoryError,
@@ -79,25 +86,45 @@ function Home() {
     data: locationData,
   } = useQuery("locations", fetchLocations);
 
-  function onSelectCategory(category) {
-    if (category.pk == 0) {
-      setSelectedCategory(null);
-      query.delete("category");
-    } else {
-      setSelectedCategory(category);
+  /* Update query strings according to state */
+
+  React.useEffect(() => {
+    if (category) {
       query.set("category", category.name_slug);
+    } else if (!queryCategorySlug) {
+      query.delete("category");
     }
     history.push({ search: query.toString() });
-  }
-  React.useEffect(
-    () =>
-      setSelectedCategory(
+  }, [category]); //eslint-disable-line
+  React.useEffect(() => {
+    if (location) {
+      query.set("location", location.properties.pk);
+    } else if (!queryLocationPk) {
+      query.delete("location");
+    }
+    history.push({ search: query.toString() });
+  }, [location]); //eslint-disable-line
+
+  /* Update state according to query strings */
+
+  React.useEffect(() => {
+    if (queryCategorySlug && categoryData) {
+      setCategory(
         categoryData.filter(
-          (category) => category.name_slug == queryCategory
+          (category) => category.name_slug === queryCategorySlug
         )[0]
-      ),
-    [query, categoryData, queryCategory]
-  );
+      );
+    }
+  }, [queryCategorySlug, categoryData]); //eslint-disable-line
+  React.useEffect(() => {
+    if (queryLocationPk && locationData) {
+      setLocation(
+        locationData.features.filter(
+          (location) => location.properties.pk === Number(queryLocationPk)
+        )[0]
+      );
+    }
+  }, [queryLocationPk, locationData]); //eslint-disable-line
 
   if (locationIsLoading || categoryIsLoading) return <div>Loading...</div>;
   if (locationError || categoryError)
@@ -112,35 +139,23 @@ function Home() {
     <>
       <div
         className={`relative z-20 transition duration-300 ease-in-out opacity-${
-          displayHeader ? 100 : 0
+          !location ? 100 : 0
         }`}
       >
         <div className="bg-red-500 h-8"></div>
         <div className="flex items-center justify-center gap-4 sm:gap-32 p-6 bg-opacity-40 bg-white">
-          <Link to="/">
-            <h1 className="font-bold text-xl w-full md:w-max uppercase">
-              Harta diasporei <br /> din Berlin
-            </h1>
-          </Link>
+          <h1 className="font-bold text-xl w-full md:w-max uppercase">
+            Harta diasporei <br /> din Berlin
+          </h1>
           <a className="w-32" href="https://diasporacivica.berlin">
             <img alt="Logo of Diaspora Civica Berlin" src={dcbLogo} />
           </a>
         </div>
       </div>
       <div className="absolute inset-0">
-        <ModalMap
-          data={locationData}
-          category={selectedCategory}
-          onSelectLocation={(location) => {
-            setDisplayHeader(!location);
-          }}
-        />
+        <ModalMap data={locationData} category={category} />
         <div className="absolute bottom-20 right-0">
-          <Select
-            data={categoryData}
-            onSelect={onSelectCategory}
-            selectedCategory={selectedCategory}
-          />
+          <Select data={categoryData} />
         </div>
       </div>
     </>
@@ -152,25 +167,26 @@ function Home() {
  * @param {object} locations The POI data as GeoJSON object.
  * @param {function} onClick Callback for a click event on a pin.
  */
-function Map({ locations, onClick }) {
+function Map({ locations }) {
   const [viewport, setViewport] = React.useState({
     latitude: 52.518008,
     longitude: 13.390954,
     zoom: 11.1,
   });
+  const [location, setLocation] = useLocation();
 
-  function onSelectPin(feature) {
-    onClick(feature);
-    setViewport({
-      ...viewport,
-      longitude: feature.geometry.coordinates[0],
-      latitude: feature.geometry.coordinates[1] - 0.004,
-      zoom: 13,
-      transitionDuration: 1500,
-      transitionInterpolator: new FlyToInterpolator(),
-      transitionEasing: easeCubic,
-    });
-  }
+  React.useEffect(() => {
+    location &&
+      setViewport({
+        ...viewport,
+        longitude: location.geometry.coordinates[0],
+        latitude: location.geometry.coordinates[1] - 0.006,
+        zoom: 13,
+        transitionDuration: 1500,
+        transitionInterpolator: new FlyToInterpolator(),
+        transitionEasing: easeCubic,
+      });
+  }, [location]); //eslint-disable-line
 
   let pinData = {};
   if (locations.features) {
@@ -189,7 +205,10 @@ function Map({ locations, onClick }) {
       mapboxApiAccessToken={MAPBOX_TOKEN}
     >
       <Source id="my-data" type="geojson" data={pinData}>
-        <Pins data={pinData.features} onClick={onSelectPin} />
+        <Pins
+          data={pinData.features}
+          onClick={(location) => setLocation(location)}
+        />
       </Source>
     </ReactMapGL>
   );
@@ -200,14 +219,17 @@ function Map({ locations, onClick }) {
  * @param {object} selectedLocation The POI data.
  * @param {function} onClose Callback to be executed when the modal is closed.
  */
-function POIModal({ selectedLocation, onClose }) {
+function POIModal() {
   const dialogTitleRef = React.useRef(null);
+  const [location, setLocation] = useLocation();
+  const { category, name, email, website, address, description, phone } =
+    location?.properties || {};
   return (
     <Dialog
       as="div"
       className="fixed bottom-0 z-40 overflow-y-auto"
-      onClose={onClose}
-      open={!!selectedLocation}
+      onClose={() => setLocation(null)}
+      open={!!location}
       initialFocus={dialogTitleRef}
     >
       <Transition
@@ -215,7 +237,7 @@ function POIModal({ selectedLocation, onClose }) {
         enter="ease-out duration-300"
         enterFrom="opacity-0"
         enterTo="opacity-100"
-        show={!!selectedLocation}
+        show={!!location}
         as={React.Fragment}
       >
         <div>
@@ -236,58 +258,52 @@ function POIModal({ selectedLocation, onClose }) {
                 >
                   <div>
                     <span className="font-semibold text-sm uppercase text-gray-500">
-                      {selectedLocation?.category?.label_singular}
+                      {category?.label_singular}
                     </span>
-                    <div>{selectedLocation?.name}</div>
+                    <div>{name}</div>
                   </div>
                   <div className="flex">
                     <XCircleIcon
                       type="button"
                       className="cursor-pointer justify-center h-8 w-8 hover:text-red-500 text-gray-500 focus:outline-none"
-                      onClick={onClose}
+                      onClick={() => setLocation(null)}
                     />
                   </div>
                 </div>
               </Dialog.Title>
 
               <div className="mt-4 text-md">
-                {selectedLocation?.address && (
+                {address && (
                   <div className="flex items-center font-semibold text-gray-600">
                     <LocationMarkerIcon className="flex-none inline h-5 w-5 mr-2" />
-                    <div>{selectedLocation.address}</div>
+                    <div>{address}</div>
                   </div>
                 )}
-                {selectedLocation?.email && (
+                {email && (
                   <div className="flex items-center">
                     <MailIcon className="flex-none h-5 w-5 mr-2 text-gray-600" />
-                    <a
-                      href={`mailto://${selectedLocation.email}`}
-                      className="text-blue-600"
-                    >
-                      {selectedLocation.email}
+                    <a href={`mailto://${email}`} className="text-blue-600">
+                      {email}
                     </a>
                   </div>
                 )}
-                {selectedLocation?.phone && (
+                {phone && (
                   <div className="flex items-center text-gray-600">
                     <PhoneIcon className="flex-none h-5 w-5 mr-2" />
-                    <div>{selectedLocation.phone}</div>
+                    <div>{phone}</div>
                   </div>
                 )}
-                {selectedLocation?.website && (
+                {website && (
                   <div className="flex items-center">
                     <LinkIcon className="flex-none h-5 w-5 mr-2 text-gray-600" />
-                    <a
-                      href={selectedLocation.website}
-                      className="text-blue-600"
-                    >
-                      {selectedLocation.website}
+                    <a href={website} className="text-blue-600">
+                      {website}
                     </a>
                   </div>
                 )}
               </div>
               <div className="mt-4">
-                <p className="text-lg">{selectedLocation?.description}</p>
+                <p className="text-lg">{description}</p>
               </div>
             </div>
           </Transition.Child>
@@ -303,32 +319,26 @@ function POIModal({ selectedLocation, onClose }) {
  * @param {object} category The selected category.
  * @param {function} onSelectLocation Callback for a location change event.
  */
-function ModalMap({ data, category, onSelectLocation }) {
+function ModalMap({ data }) {
   const [features, setFeatures] = React.useState(data.features);
-  const [selectedLocation, setSelectedLocation] = React.useState(null);
+  const [category] = useCategory();
+
   React.useEffect(() => {
-    const newFeatures = !category
-      ? data.features
-      : data.features.filter(
-          (feature) => feature.properties.category.pk == category.pk
-        );
-    setFeatures(newFeatures);
-  }, [category]);
-  React.useEffect(() => onSelectLocation(selectedLocation), [selectedLocation]);
+    if (!category || category.pk === 0) {
+      setFeatures(data.features);
+    } else {
+      setFeatures(
+        data.features.filter(
+          (feature) => feature.properties.category.pk === category.pk
+        )
+      );
+    }
+  }, [category, data.features]);
 
   return (
     <>
-      <Map
-        height="100%"
-        locations={{ ...data, features }}
-        onClick={(feature) => {
-          setSelectedLocation(feature.properties);
-        }}
-      />
-      <POIModal
-        selectedLocation={selectedLocation}
-        onClose={() => setSelectedLocation(null)}
-      />
+      <Map locations={{ ...data, features }} />
+      <POIModal />
     </>
   );
 }

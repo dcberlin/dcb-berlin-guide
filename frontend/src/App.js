@@ -91,7 +91,7 @@ function Home() {
   React.useEffect(() => {
     if (category) {
       query.set("category", category.name_slug);
-    } else if (!category || !queryCategorySlug) {
+    } else if (!category && !queryCategorySlug) {
       query.delete("category");
     }
     history.push({ search: query.toString() });
@@ -99,7 +99,7 @@ function Home() {
   React.useEffect(() => {
     if (location) {
       query.set("location", location.properties.pk);
-    } else if (!location || !queryLocationPk) {
+    } else if (!location && !queryLocationPk) {
       query.delete("location");
     }
     history.push({ search: query.toString() });

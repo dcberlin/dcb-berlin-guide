@@ -138,7 +138,7 @@ function Home() {
   return (
     <>
       <div
-        className={`relative z-20 transition duration-300 ease-in-out opacity-${
+        className={`relative z-20 transition duration-300 delay-100 ease-in-out opacity-${
           !location ? 100 : 0
         }`}
       >

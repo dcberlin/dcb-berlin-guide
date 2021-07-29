@@ -91,15 +91,15 @@ function Home() {
   React.useEffect(() => {
     if (category) {
       query.set("category", category.name_slug);
-    } else if (!queryCategorySlug) {
+    } else if (!category || !queryCategorySlug) {
       query.delete("category");
     }
     history.push({ search: query.toString() });
-  }, [category]); //eslint-disable-line
+  }, [category, queryCategorySlug]); //eslint-disable-line
   React.useEffect(() => {
     if (location) {
       query.set("location", location.properties.pk);
-    } else if (!queryLocationPk) {
+    } else if (!location || !queryLocationPk) {
       query.delete("location");
     }
     history.push({ search: query.toString() });

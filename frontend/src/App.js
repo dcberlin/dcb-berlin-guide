@@ -74,57 +74,70 @@ function Home() {
 
   const queryCategorySlug = query.get("category");
   const queryLocationPk = query.get("location");
+  const firstRender = React.useRef(true);
 
   const {
     isLoading: categoryIsLoading,
     error: categoryError,
     data: categoryData,
-  } = useQuery("categories", fetchCategories);
+  } = useQuery("categories", fetchCategories, { placeholderData: [] });
   const {
     isLoading: locationIsLoading,
     error: locationError,
     data: locationData,
-  } = useQuery("locations", fetchLocations);
-
-  /* Update query strings according to state */
-
-  React.useEffect(() => {
-    if (category) {
-      query.set("category", category.name_slug);
-    } else if (!category && !queryCategorySlug) {
-      query.delete("category");
-    }
-    history.push({ search: query.toString() });
-  }, [category, queryCategorySlug]); //eslint-disable-line
-  React.useEffect(() => {
-    if (location) {
-      query.set("location", location.properties.pk);
-    } else if (!location && !queryLocationPk) {
-      query.delete("location");
-    }
-    history.push({ search: query.toString() });
-  }, [location]); //eslint-disable-line
+  } = useQuery("locations", fetchLocations, {
+    placeholderData: { features: [] },
+  });
 
   /* Update state according to query strings */
 
   React.useEffect(() => {
-    if (queryCategorySlug && categoryData) {
-      setCategory(
-        categoryData.filter(
-          (category) => category.name_slug === queryCategorySlug
-        )[0]
-      );
+    if (queryCategorySlug) {
+      const newCategory = categoryData.filter(
+        (category) => category.name_slug === queryCategorySlug
+      )[0];
+      if (newCategory) {
+        setCategory(newCategory);
+      } else if (!queryCategorySlug) {
+        query.delete("category");
+        history.push({ search: query.toString() });
+      }
     }
   }, [queryCategorySlug, categoryData]); //eslint-disable-line
+
   React.useEffect(() => {
-    if (queryLocationPk && locationData) {
-      setLocation(
-        locationData.features.filter(
-          (location) => location.properties.pk === Number(queryLocationPk)
-        )[0]
-      );
+    if (queryLocationPk) {
+      const newLocation = locationData.features.filter(
+        (location) => location.properties.pk === Number(queryLocationPk)
+      )[0];
+      if (newLocation) {
+        setLocation(newLocation);
+      } else if (!queryLocationPk) {
+        query.delete("location");
+        history.push({ search: query.toString() });
+      }
     }
   }, [queryLocationPk, locationData]); //eslint-disable-line
+
+  /* Update query strings according to state */
+
+  React.useEffect(() => {
+    if (firstRender.current) {
+      firstRender.current = false;
+      return;
+    }
+    if (category?.name_slug) {
+      query.set("category", category.name_slug);
+    } else {
+      query.delete("category");
+    }
+    if (location) {
+      query.set("location", location.properties.pk);
+    } else {
+      query.delete("location");
+    }
+    history.push({ search: query.toString() });
+  }, [category, location]); //eslint-disable-line
 
   if (locationIsLoading || categoryIsLoading) return <div>Loading...</div>;
   if (locationError || categoryError)

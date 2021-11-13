@@ -7,7 +7,12 @@ from .models import Location, Category
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = ("pk", "name_slug", "label_singular", "label_plural")
+        fields = [
+            "pk",
+            "name_slug",
+            "label_singular",
+            "label_plural",
+        ]
 
 
 class LocationSerializer(GeoFeatureModelSerializer):
@@ -25,4 +30,7 @@ class LocationSerializer(GeoFeatureModelSerializer):
             "description",
             "category",
             "phone",
+            "geographic_entity",
+            "inexact_location",
+            "published",
         ]

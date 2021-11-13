@@ -1,0 +1,1730 @@
+[
+  {
+    "model": "locations.location",
+    "pk": 1,
+    "fields": {
+      "name": "Ambasada Rom\u00e2niei - sec\u021bia consular\u0103",
+      "address": "Dorotheenstra\u00dfe 62 - 66, 10117 Berlin",
+      "category": 2,
+      "geographic_entity": true,
+      "phone": "030 21239555",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "http://berlin.mae.ro/contact",
+      "description": "Toate serviciile consulare: eliberare / reinnoire pasaport, procuri, etc se fac conform pasilor urmatori:\nCreare cont pe https://www.econsulat.ro/\nDin contul nou creat se alege serviciul dorit (eliberare / reinnoire pasaport, procuri, etc)\nButonul \u201eProgramati-va\u201d va conduce spre un calendar cu datele disponibile (datele se elibereaza la fiecare inceput de luna, in cazul unei urgente se poate trimite mail la berlin.cons@mae.ro)."
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 2,
+    "fields": {
+      "name": "Institutul Cultural Roman \"Titu Maiorescu\" din Berlin",
+      "address": "Reinhardtstra\u00dfe 14, 10117 Berlin",
+      "category": 6,
+      "geographic_entity": true,
+      "phone": "030 89061987",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "https://www.icr.ro/berlin/",
+      "description": ""
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 3,
+    "fields": {
+      "name": "La Bebe Caraian",
+      "address": "Sonnenallee 149, 12059 Berlin",
+      "category": 3,
+      "geographic_entity": true,
+      "phone": "0163 4993858",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "",
+      "description": ""
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 4,
+    "fields": {
+      "name": "Ro-Markt",
+      "address": "Seegefelder Str. 59, 13583 Berlin",
+      "category": 3,
+      "geographic_entity": true,
+      "phone": "",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "https://ro-markt.business.site/",
+      "description": ""
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 5,
+    "fields": {
+      "name": "Carpatia Markt",
+      "address": "Nachodstrasse nr 6, 10779 Berlin",
+      "category": 3,
+      "geographic_entity": true,
+      "phone": "0151 66850433",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "",
+      "description": ""
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 6,
+    "fields": {
+      "name": "Kantine Zum Nussbaum",
+      "address": "Sonnenallee 298, 12057 Berlin",
+      "category": 3,
+      "geographic_entity": true,
+      "phone": "030 34627764",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "https://kantine-zum-nussbaum.eatbu.com/",
+      "description": ""
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 7,
+    "fields": {
+      "name": "Rum\u00e4nisch in Berlin e.V.",
+      "address": "Braunschweiger Str. 22, 12055 Berlin",
+      "category": 1,
+      "geographic_entity": true,
+      "phone": "030 49962190",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "http://www.rumaenisch.berlin/",
+      "description": ""
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 8,
+    "fields": {
+      "name": "Amaro Foro",
+      "address": "Weichselplatz 8, 12045 Berlin",
+      "category": 1,
+      "geographic_entity": true,
+      "phone": "030 43205373",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "https://amaroforo.de/",
+      "description": ""
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 9,
+    "fields": {
+      "name": "BEMA",
+      "address": "Kapweg 4, 13405 Berlin",
+      "category": 1,
+      "geographic_entity": true,
+      "phone": "030 513019278",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "",
+      "description": ""
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 10,
+    "fields": {
+      "name": "Willkommenszentrum  - Centrul de \u00eent\u00e2mpinare Berlin",
+      "address": "Potsdamer Stra\u00dfe 65, 10785 Belin",
+      "category": 1,
+      "geographic_entity": true,
+      "phone": "030 513 01 92 78",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "",
+      "description": ""
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 11,
+    "fields": {
+      "name": "Galeria Plan B",
+      "address": "Building G, Second Backyard, Potsdamer Stra\u00dfe 77-87, 10785 Berlin",
+      "category": 6,
+      "geographic_entity": true,
+      "phone": "",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "",
+      "description": ""
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 12,
+    "fields": {
+      "name": "Studio Niculescu",
+      "address": "Oranienstra\u00dfe 163, 10969 Berlin",
+      "category": 6,
+      "geographic_entity": true,
+      "phone": "",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "",
+      "description": ""
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 13,
+    "fields": {
+      "name": "Parohia Ortodox\u0103 Rom\u00e2n\u0103 \u201cSf. Arh. Mihail \u015fi Gavriil\u201d",
+      "address": "Heerstr. 63, 14055 Berlin",
+      "category": 8,
+      "geographic_entity": true,
+      "phone": "",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "https://www.biserica-romana-berlin.de/de/",
+      "description": ""
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 14,
+    "fields": {
+      "name": "Biserica Penticostala Izvorul M\u00e2ntuirii",
+      "address": "Glauchauer Str. 7, 12627 Berlin",
+      "category": 8,
+      "geographic_entity": true,
+      "phone": "",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "",
+      "description": ""
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 15,
+    "fields": {
+      "name": "Roatlassib Tours GmbH",
+      "address": "B\u00fclowstra\u00dfe 11, 10783 Berlin",
+      "category": 5,
+      "geographic_entity": true,
+      "phone": "",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "",
+      "description": ""
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 16,
+    "fields": {
+      "name": "Dr. Dagmar Bach",
+      "address": "Wilmersdorfer Str. 79, 10629 Berlin",
+      "category": 9,
+      "geographic_entity": true,
+      "phone": "030 3814490",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "https://www.arzt-auskunft.de/arzt/psychiatrie/berlin/dagmar-bach-2135819",
+      "description": "Psihiatrie, Neurologie"
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 17,
+    "fields": {
+      "name": "Dr. Daniela Baumgarten",
+      "address": "Bredowstr. 48, 10551 Berlin",
+      "category": 9,
+      "geographic_entity": true,
+      "phone": "030 3610068",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "https://www.arzt-auskunft.de/arzt/kinder-jugendpsychiatrie-und-psychotherapie/berlin/daniela-baumgarten-3763757",
+      "description": "Psihiatrie pediatric\u0103"
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 18,
+    "fields": {
+      "name": "Dr. Dorin Eugen Tiurbe",
+      "address": "Ansbacher Stra\u00dfe 17-19, 10787 Berlin",
+      "category": 9,
+      "geographic_entity": true,
+      "phone": "030 78 09 98 80",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "https://www.arzt-auskunft.de/arzt/orthopaedie/berlin/dr-dorin-eugen-tiurbe-6606023",
+      "description": "Ortopedie"
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 19,
+    "fields": {
+      "name": "Dr. Gheorghe Chirilas",
+      "address": "Weisestr. 13, Berlin",
+      "category": 9,
+      "geographic_entity": true,
+      "phone": "030 6216097",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "https://chirilas.eu/",
+      "description": "Stomatologie"
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 20,
+    "fields": {
+      "name": "Dr. Kostas Christodulu",
+      "address": "Kurf\u00fcrstendamm 69, 10707 Berlin",
+      "category": 9,
+      "geographic_entity": true,
+      "phone": "030 2176062",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "",
+      "description": "Ginecologie"
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 21,
+    "fields": {
+      "name": "Dr. Unger Frank Uwe",
+      "address": "Berlin Marzahn 12689, Havemannstr. 24",
+      "category": 9,
+      "geographic_entity": true,
+      "phone": "030 93664575",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "https://www.arzt-auskunft.de/arzt/praktischer-arzt/berlin/dr-frank-uwe-unger-667355",
+      "description": "Medicin\u0103 general\u0103"
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 22,
+    "fields": {
+      "name": "Dr. Sorin Draghici",
+      "address": "Sonnenallee 306c, 12057 Berlin",
+      "category": 9,
+      "geographic_entity": true,
+      "phone": "030 6844994",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "",
+      "description": "Oftalmologie"
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 23,
+    "fields": {
+      "name": "Dr. Thomas Egri",
+      "address": "Scharnweberstr. 44, 13405 Berlin",
+      "category": 9,
+      "geographic_entity": true,
+      "phone": "030 4122433",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "https://www.arzt-auskunft.de/arzt/innere-medizin/berlin/dr-thomas-egri-683693",
+      "description": "Medicin\u0103 intern\u0103"
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 24,
+    "fields": {
+      "name": "Dr. Udo Horak",
+      "address": "Prenzlauer Allee 88, 10405 Berlin",
+      "category": 9,
+      "geographic_entity": true,
+      "phone": "030 42027662",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "https://www.arzt-auskunft.de/arzt/psychiatrie-und-psychotherapie/berlin/dr-udo-horak-3403445",
+      "description": "Psihiatrie, Neurologie"
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 25,
+    "fields": {
+      "name": "Dr. Ingrid Ispas",
+      "address": "Yorckstr. 74, 10965 Berlin",
+      "category": 9,
+      "geographic_entity": true,
+      "phone": "030 7858022",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "https://www.arzt-auskunft.de/arzt/zahnaerztin/berlin/dr-ingrid-ispas-2078441",
+      "description": "Stomatologie"
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 26,
+    "fields": {
+      "name": "Dr. Karl Ulrich Johann",
+      "address": "Friedrichstr. 94, 10117 Berlin",
+      "category": 9,
+      "geographic_entity": true,
+      "phone": "030 4644474",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "https://www.arzt-auskunft.de/arzt/urologie/berlin/dr-karl-ulrich-johann-666617",
+      "description": "Urologie"
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 27,
+    "fields": {
+      "name": "Dr. Hans J\u00fcrgen Kleiner",
+      "address": "Schwanebecker Chaussee 50, 13125 Berlin",
+      "category": 9,
+      "geographic_entity": true,
+      "phone": "030 940112995",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "",
+      "description": "Medicin\u0103 intern\u0103, cardiologie"
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 28,
+    "fields": {
+      "name": "Dr. Gertraud Kremer",
+      "address": "Breitenbachplatz 8, 14195 Berlin",
+      "category": 9,
+      "geographic_entity": true,
+      "phone": "030 8234024",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "",
+      "description": "Dermatologie \u0219i boli sexuale"
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 29,
+    "fields": {
+      "name": "Dr. Sorina Kunert",
+      "address": "Haberlandweg 4, 13591 Berlin",
+      "category": 9,
+      "geographic_entity": true,
+      "phone": "030 3725284",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "https://www.arzt-auskunft.de/arzt/frauenheilkunde-und-geburtshilfe/berlin/dr-sorina-kunert-2301377",
+      "description": "Ginecologie"
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 30,
+    "fields": {
+      "name": "Dr. Anneliese Linnhoff",
+      "address": "Hohenzollerndamm 2, 10717 Berlin",
+      "category": 9,
+      "geographic_entity": true,
+      "phone": "030 8811955",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "https://lungenpraxis-linnhoff.de/",
+      "description": "Medicin\u0103 intern\u0103, Pneumologie"
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 31,
+    "fields": {
+      "name": "Dr. Bruno Harald Lurtz",
+      "address": "Bahnhofstr. 17, 12555 Berlin",
+      "category": 9,
+      "geographic_entity": true,
+      "phone": "030 6572266",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "http://www.praxis-lurtz.de/",
+      "description": "Ortopedie"
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 32,
+    "fields": {
+      "name": "Dr. Michael Mro\u00df",
+      "address": "Ehrenfelsstr. 47, 10318 Berlin",
+      "category": 9,
+      "geographic_entity": true,
+      "phone": "030 5293310",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "http://www.dr-mross.de/",
+      "description": "Medicin\u0103 intern\u0103"
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 33,
+    "fields": {
+      "name": "Dr. Johann M\u00fcller Milas",
+      "address": "Schlo\u00dfstr. 107/108, 12163 Berlin",
+      "category": 9,
+      "geographic_entity": true,
+      "phone": "030 7973011",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "https://www.arzt-auskunft.de/arzt/allgemeinmedizin/berlin/dr-johann-mueller-milas-2424017",
+      "description": "Medicin\u0103 general\u0103 \u0219i de familie"
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 34,
+    "fields": {
+      "name": "Dr. Gheorghe Popovici",
+      "address": "Lahnstr. 98, 12055 Berlin",
+      "category": 9,
+      "geographic_entity": true,
+      "phone": "030 68597470",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "https://www.zahnarzt-popovici.de/",
+      "description": "Stomatologie"
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 35,
+    "fields": {
+      "name": "Dr. Dana Alina Rosenberger",
+      "address": "Franzensbader Str. 2, 14193 Berlin",
+      "category": 9,
+      "geographic_entity": true,
+      "phone": "030 8251027",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "",
+      "description": "Dermatologie \u0219i boli sexuale"
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 36,
+    "fields": {
+      "name": "Dr. Cristina Schurwanz",
+      "address": "Friedrichstr. 94, 10117 Berlin",
+      "category": 9,
+      "geographic_entity": true,
+      "phone": "030 4644474",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "https://www.urologen-berlin.de/",
+      "description": "Urologie"
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 37,
+    "fields": {
+      "name": "Dr. Milutin Stankovic",
+      "address": "Berliner Str. 36, 10715 Berlin",
+      "category": 9,
+      "geographic_entity": true,
+      "phone": "030 8613556",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "https://www.arzt-auskunft.de/arzt/hals-nasen-ohrenheilkunde/berlin/dr-milutin-stankovic-664511",
+      "description": "ORL"
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 38,
+    "fields": {
+      "name": "Dr. Christian Teutsch",
+      "address": "Frankfurter Allee 231a, 10365 Berlin",
+      "category": 9,
+      "geographic_entity": true,
+      "phone": "030 55184468",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "",
+      "description": "Medicin\u0103 intern\u0103"
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 39,
+    "fields": {
+      "name": "Dr. Laurentiu Ureche",
+      "address": "Manfred-von-Richthofen-Str. 4, 12101 Berlin",
+      "category": 9,
+      "geographic_entity": true,
+      "phone": "030 7867734",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "",
+      "description": "Medicin\u0103 general\u0103 \u0219i de familie"
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 40,
+    "fields": {
+      "name": "Dr. Tudor Viorel Voda",
+      "address": "Tempelhofer Damm 124, 12099 Berlin",
+      "category": 9,
+      "geographic_entity": true,
+      "phone": "030 71093917",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "https://www.arzt-auskunft.de/arzt/allgemeinmedizin/berlin/tudor-viorel-voda-711881",
+      "description": "Medicin\u0103 general\u0103 \u0219i de familie"
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 41,
+    "fields": {
+      "name": "Dr. Sorina Muntean",
+      "address": "Berliner Allee 105, 13088 Berlin",
+      "category": 9,
+      "geographic_entity": true,
+      "phone": "030 49857840",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "",
+      "description": "Pediatrie"
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 42,
+    "fields": {
+      "name": "Dr. Roland Freund",
+      "address": "Eichhorster Weg 11, 13435 Berlin",
+      "category": 9,
+      "geographic_entity": true,
+      "phone": "030 4163069",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "https://www.freund-hollopp.de/unser-team/dr-med-r-freund/",
+      "description": "Ortopedie"
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 43,
+    "fields": {
+      "name": "Dr. Egri Thomas",
+      "address": "Scharnweberstr. 44, 13405 Berlin",
+      "category": 9,
+      "geographic_entity": true,
+      "phone": "030 41783973",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "",
+      "description": "Medicin\u0103 intern\u0103"
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 44,
+    "fields": {
+      "name": "Dr. Ghenadie Balta",
+      "address": "Mariendorfer Damm 443, 12107 Berlin",
+      "category": 9,
+      "geographic_entity": true,
+      "phone": "030 7427002",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "https://maddent.de",
+      "description": "Stomatologie"
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 45,
+    "fields": {
+      "name": "Dr. Simona Bianca H\u00fcbers",
+      "address": "Seebadallee 19, Rangsdorf 15834",
+      "category": 9,
+      "geographic_entity": true,
+      "phone": "033 708 906634",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "https://www.xn--psychiatrie-hbers-f3b.de/",
+      "description": "Psihiatrie, Neurologie"
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 46,
+    "fields": {
+      "name": "Dr. G\u00e4rtner Roswitha",
+      "address": "Badstra\u00dfe 32, 13357 Berlin",
+      "category": 9,
+      "geographic_entity": true,
+      "phone": "030 81 03 78 10",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "https://www.arzt-auskunft.de/arzt/allgemeinmedizin/berlin/dr-roswitha-gaertner-3967950",
+      "description": "Medicin\u0103 general\u0103 \u0219i de familie"
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 47,
+    "fields": {
+      "name": "Dr. Elena-Cristina Cretulescu",
+      "address": "Ruhlebener Stra\u00dfe 197 13597 Berlin",
+      "category": 9,
+      "geographic_entity": true,
+      "phone": "030 3327549",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "https://xn--praxis-fr-psychotherapie-2sc.com/",
+      "description": "Psihoterapie"
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 48,
+    "fields": {
+      "name": "Dr. Ispas Ingrid",
+      "address": "Yorckstr. 74, 10965 Berlin",
+      "category": 9,
+      "geographic_entity": true,
+      "phone": "030 7858022",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "",
+      "description": "Stomatologie"
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 49,
+    "fields": {
+      "name": "Dr. Schwartzmann Anna",
+      "address": "Franz Jacob Str. 10, 10369 Berlin",
+      "category": 9,
+      "geographic_entity": true,
+      "phone": "030 96 60 82 54",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "http://www.lungenarzt-in-berlin.de",
+      "description": "Pneumologie"
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 50,
+    "fields": {
+      "name": "Dr. Raileanu Irina",
+      "address": "Friedrichstr. 113 a, 10117 Berlin",
+      "category": 9,
+      "geographic_entity": true,
+      "phone": "030 2817230",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "https://www.arzt-auskunft.de/arzt/allgemeinmedizin/berlin/dr-irina-raileanu-4140455",
+      "description": "Medicin\u0103 general\u0103 \u0219i de familie"
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 51,
+    "fields": {
+      "name": "Dr. Schmidt-Ioanas Malina",
+      "address": "Proskauer Str. 12, 10247 Berlin",
+      "category": 9,
+      "geographic_entity": true,
+      "phone": "030 4293939",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "",
+      "description": "Medicin\u0103 general\u0103 \u0219i de familie"
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 52,
+    "fields": {
+      "name": "Dr. Robert Matthias",
+      "address": "Joachim Friedrich Str. 46, 10711 Berlin",
+      "category": 9,
+      "geographic_entity": true,
+      "phone": "89044580",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "http://www.internist-in-wilmersdorf.de/kontakt.html",
+      "description": "Medicin\u0103 general\u0103 \u0219i de familie"
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 53,
+    "fields": {
+      "name": "Dr. Christodulu Kostas",
+      "address": "Kurf\u00fcrstendamm 69, 10707 Berlin",
+      "category": 9,
+      "geographic_entity": true,
+      "phone": "030 2176062",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "",
+      "description": "Ginecologie"
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 54,
+    "fields": {
+      "name": "Dr. Panzer Daniel",
+      "address": "Schlo\u00dfstr. 40, 12165 Berlin",
+      "category": 9,
+      "geographic_entity": true,
+      "phone": "030 74770840",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "",
+      "description": "Medic Anestezist"
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 55,
+    "fields": {
+      "name": "Dr. Linnhoff Anneliese",
+      "address": "Hohenzollerndammstr 2, 10717 Berlin",
+      "category": 9,
+      "geographic_entity": true,
+      "phone": "030 8811955",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "https://lungenpraxis-linnhoff.de/covid-impfung/",
+      "description": "Medicin\u0103 intern\u0103, pneumologie"
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 56,
+    "fields": {
+      "name": "Dr. Ion George Anghelescu",
+      "address": "Platanenallee 11, 14050 Berlin",
+      "category": 9,
+      "geographic_entity": true,
+      "phone": "030 235936711",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "https://www.ion-anghelescu.de/",
+      "description": "Psihiatrie, Psihoterapie"
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 57,
+    "fields": {
+      "name": "Dr. Elke Schroeter",
+      "address": "Blenheimstra\u00dfe 20, 12685 Berlin",
+      "category": 9,
+      "geographic_entity": true,
+      "phone": "030 5 42 41 74",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "",
+      "description": "Medicin\u0103 general\u0103 \u0219i de familie"
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 58,
+    "fields": {
+      "name": "Dr. Andrei Cuculescu",
+      "address": "Hermannstra\u00dfe 77, Berlin 12049,",
+      "category": 9,
+      "geographic_entity": true,
+      "phone": "030 62730181",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "http://zahnarzt-cuculescu.de/",
+      "description": "Stomatologie"
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 59,
+    "fields": {
+      "name": "Dr. Frank Sudhof",
+      "address": "Wiesbadener Str. 89, 12161 Berlin",
+      "category": 9,
+      "geographic_entity": true,
+      "phone": "030 8517985",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "https://www.sudhoff-frank.de/",
+      "description": "Urologie"
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 60,
+    "fields": {
+      "name": "Dr. Schurwanz Cristina",
+      "address": "Friedrichstr. 94, 10117 Berlin Mitte",
+      "category": 9,
+      "geographic_entity": true,
+      "phone": "030 4644474",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "https://www.urologen-berlin.de/",
+      "description": "Urologie"
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 61,
+    "fields": {
+      "name": "Dr. Lurtz Bruno Harald",
+      "address": "Berlin K\u00f6penick 12555, Bahnhofstr. 17",
+      "category": 9,
+      "geographic_entity": true,
+      "phone": "030 6572266",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "https://www.praxis-lurtz.de/",
+      "description": "Ortopedie"
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 62,
+    "fields": {
+      "name": "Dr. Roxana Viviana Enache",
+      "address": "Blissestra\u00dfe 2 - 6, 10713 Berlin",
+      "category": 9,
+      "geographic_entity": true,
+      "phone": "030 82 70 64 93",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "http://www.kfo-axelrad.de",
+      "description": "Stomatologie"
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 63,
+    "fields": {
+      "name": "Dr. Roxana Angelescu",
+      "address": "Karlsbader Str. 1, 14193 Berlin",
+      "category": 9,
+      "geographic_entity": true,
+      "phone": "030 82 560 20",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "https://mederi.dental/praxis/",
+      "description": "Stomatologie"
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 64,
+    "fields": {
+      "name": "Dr. Constantin Chris",
+      "address": "Konstanzer Str. 1, 10707 Berlin",
+      "category": 9,
+      "geographic_entity": true,
+      "phone": "030 8822222",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "http://www.bucurescu.de",
+      "description": "Stomatologie"
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 65,
+    "fields": {
+      "name": "Dr. Sebert Michael",
+      "address": "Rubensstra\u00dfe 119, 12157 Berlin",
+      "category": 9,
+      "geographic_entity": true,
+      "phone": "030 72 01 10 - 132",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "http://www.polikum.de",
+      "description": "Pneumologie"
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 66,
+    "fields": {
+      "name": "Dr. Aliona Berger",
+      "address": "Mehrower Allee 22, 12687 Berlin",
+      "category": 9,
+      "geographic_entity": true,
+      "phone": "030 9309324",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "",
+      "description": "Ginecologie"
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 67,
+    "fields": {
+      "name": "Deutsch-Rum\u00e4nische Gesellschaft (Societatea Rom\u00e2no-German\u0103)",
+      "address": "14059 Berlin",
+      "category": 2,
+      "geographic_entity": true,
+      "phone": "030 30127242",
+      "inexact_location": true,
+      "published": true,
+      "email": "",
+      "website": "https://www.deruge.org/",
+      "description": ""
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 68,
+    "fields": {
+      "name": "Kulturen im Kiez e.V.",
+      "address": "Utrechter Stra\u00dfe 36, 13347 Berlin",
+      "category": 2,
+      "geographic_entity": true,
+      "phone": "030 983 277 67",
+      "inexact_location": false,
+      "published": true,
+      "email": "info@kulturen-im-kiez.de",
+      "website": "http://kulturen-im-kiez.de/kontakt/",
+      "description": ""
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 69,
+    "fields": {
+      "name": "Dr. Magda Bunea",
+      "address": "Friedrichstra\u00dfe 94, 10117 Berlin",
+      "category": 9,
+      "geographic_entity": true,
+      "phone": "030 22002180",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "https://docortho.de",
+      "description": "Medic de familie"
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 70,
+    "fields": {
+      "name": "ADNBA Planungsgesellschaft UG",
+      "address": "Oderstrasse 16, 10247 Berlin",
+      "category": 6,
+      "geographic_entity": true,
+      "phone": "0176 265 320 28",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "http://adnba.de/",
+      "description": "Birou de arhitectura "
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 71,
+    "fields": {
+      "name": "Anne Glinka-K\u00f6nemund",
+      "address": "Ansbacher Stra\u00dfe 74, 10777 Berlin",
+      "category": 4,
+      "geographic_entity": true,
+      "phone": "030 21918835",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "https://www.glinka-rechtsanwaeltin.de/",
+      "description": "Birou de avocatura"
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 72,
+    "fields": {
+      "name": "Hans-J\u00fcrgen Schleicher",
+      "address": "Schildhornstr. 87, 12163 Berlin",
+      "category": 4,
+      "geographic_entity": true,
+      "phone": "        \n030 8515837",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "",
+      "description": "Birou de avocatura"
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 73,
+    "fields": {
+      "name": "Bianca Krakkai",
+      "address": "Behlerstr. 35, 14467 Posdam",
+      "category": 4,
+      "geographic_entity": true,
+      "phone": "3316208014",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "https://www.krakkai.de",
+      "description": ""
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 74,
+    "fields": {
+      "name": "Deutsch-Rum\u00e4nische Juristen Vereinigung e.V. (DRJV)",
+      "address": "Behlertstra\u00dfe 35, 14467 Potsdam",
+      "category": 2,
+      "geographic_entity": true,
+      "phone": "3316208014",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "http://www.drjv.de/kontakt.html",
+      "description": ""
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 75,
+    "fields": {
+      "name": "Diana Savinescu",
+      "address": "Rosenfelder Ring 15\n10315 Berlin",
+      "category": 9,
+      "geographic_entity": true,
+      "phone": "030 85627 22",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "https://www.dentspro.de/praxen-teams/zahnarztpraxis-lichtenberg",
+      "description": ""
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 76,
+    "fields": {
+      "name": "B\u00fcroservice Daniel",
+      "address": "Hertzbergstr. 20, 12055 Berlin",
+      "category": 11,
+      "geographic_entity": true,
+      "phone": "493060059433",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "https://biuro-daniel.de/ro/",
+      "description": "Contabilitate"
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 77,
+    "fields": {
+      "name": "Ruxandra Empen",
+      "address": "10437 Berlin",
+      "category": 10,
+      "geographic_entity": true,
+      "phone": "0177145 12 06",
+      "inexact_location": true,
+      "published": true,
+      "email": " info@liberconversus.eu",
+      "website": "",
+      "description": ""
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 78,
+    "fields": {
+      "name": "Helmuth Frauendorfer",
+      "address": "10437 Berlin",
+      "category": 10,
+      "geographic_entity": true,
+      "phone": "17660272367",
+      "inexact_location": true,
+      "published": true,
+      "email": "romgermaberlin@gmail.com",
+      "website": "",
+      "description": ""
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 79,
+    "fields": {
+      "name": "Patricia Habasescu",
+      "address": "10629 Berlin",
+      "category": 10,
+      "geographic_entity": true,
+      "phone": "0151 656 77 39 1",
+      "inexact_location": true,
+      "published": true,
+      "email": "patricia.habasescu@yahoo.fr",
+      "website": "",
+      "description": ""
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 80,
+    "fields": {
+      "name": "Edith Ottschofski",
+      "address": "12685 Berlin",
+      "category": 10,
+      "geographic_entity": true,
+      "phone": "0175 143 58 38",
+      "inexact_location": true,
+      "published": true,
+      "email": "e.ottschofski@sibiweb.de",
+      "website": "",
+      "description": ""
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 81,
+    "fields": {
+      "name": "Dr. phil. Anke Pfeifer",
+      "address": "13051 Berlin",
+      "category": 10,
+      "geographic_entity": true,
+      "phone": "030 9294583",
+      "inexact_location": true,
+      "published": true,
+      "email": "anke.pfeifer@web.de",
+      "website": "",
+      "description": ""
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 82,
+    "fields": {
+      "name": "Andrea Popa",
+      "address": "13349 Berlin",
+      "category": 10,
+      "geographic_entity": true,
+      "phone": "0157 387 21 351",
+      "inexact_location": true,
+      "published": true,
+      "email": "AndreaMPopa@gmail.com",
+      "website": "",
+      "description": ""
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 83,
+    "fields": {
+      "name": "Dr. Josef Sallanz",
+      "address": "10781 Berlin",
+      "category": 10,
+      "geographic_entity": true,
+      "phone": "0174 547 59 82",
+      "inexact_location": true,
+      "published": true,
+      "email": "josef.sallanz@googlemail.com",
+      "website": "",
+      "description": ""
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 84,
+    "fields": {
+      "name": "Ramona Worm",
+      "address": "13503 Berlin",
+      "category": 10,
+      "geographic_entity": true,
+      "phone": "0178 187 82 20",
+      "inexact_location": true,
+      "published": true,
+      "email": "ramona_worm@yahoo.com",
+      "website": "https://www.deutsch-romana.com/",
+      "description": ""
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 85,
+    "fields": {
+      "name": "Gabriele Wunsch",
+      "address": "13059 Berlin",
+      "category": 10,
+      "geographic_entity": true,
+      "phone": "0162 138 63 54",
+      "inexact_location": true,
+      "published": true,
+      "email": "Gabriele.Wunsch@kabelmail.de",
+      "website": "",
+      "description": ""
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 86,
+    "fields": {
+      "name": "M\u0103lina Andronescu",
+      "address": "14169 Berlin",
+      "category": 10,
+      "geographic_entity": true,
+      "phone": "0171 889 12 98",
+      "inexact_location": true,
+      "published": true,
+      "email": "malina.a@berlin.de",
+      "website": "",
+      "description": ""
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 87,
+    "fields": {
+      "name": "Christiana Bohorquez-Klinger",
+      "address": "14089 Berlin",
+      "category": 10,
+      "geographic_entity": true,
+      "phone": "0171 642 58 96",
+      "inexact_location": true,
+      "published": true,
+      "email": "cbklinger@googlemail.com",
+      "website": "",
+      "description": ""
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 88,
+    "fields": {
+      "name": "Olivia Branga",
+      "address": "13593 Berlin",
+      "category": 10,
+      "geographic_entity": true,
+      "phone": "0170 360 95 57",
+      "inexact_location": true,
+      "published": true,
+      "email": "Branga@Reinking.de",
+      "website": "",
+      "description": ""
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 89,
+    "fields": {
+      "name": "Gerhard Csejka",
+      "address": "13593 Berlin",
+      "category": 10,
+      "geographic_entity": true,
+      "phone": "0177 4844604",
+      "inexact_location": true,
+      "published": true,
+      "email": "",
+      "website": "",
+      "description": ""
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 90,
+    "fields": {
+      "name": "Gabriele D\u00fcrrenfeld",
+      "address": "12555 Berlin",
+      "category": 10,
+      "geographic_entity": true,
+      "phone": "030 6560176",
+      "inexact_location": true,
+      "published": true,
+      "email": "",
+      "website": "",
+      "description": ""
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 91,
+    "fields": {
+      "name": "Dr. Anneli Gabanyi",
+      "address": "12247 Berlin",
+      "category": 10,
+      "geographic_entity": true,
+      "phone": "0179 2281027",
+      "inexact_location": true,
+      "published": true,
+      "email": "",
+      "website": "",
+      "description": ""
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 92,
+    "fields": {
+      "name": "Ana Maria Gagiu",
+      "address": "10243 Berlin",
+      "category": 10,
+      "geographic_entity": true,
+      "phone": "0172 936 37 13",
+      "inexact_location": true,
+      "published": true,
+      "email": "ana.m.gagiu@gmail.com",
+      "website": "",
+      "description": ""
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 93,
+    "fields": {
+      "name": "Helgard Gebhardt",
+      "address": "12619 Berlin",
+      "category": 10,
+      "geographic_entity": true,
+      "phone": "0174 7158490",
+      "inexact_location": true,
+      "published": true,
+      "email": "helgard@gebhardt-berlin.de",
+      "website": "",
+      "description": ""
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 94,
+    "fields": {
+      "name": "Christina Hofmann",
+      "address": "12439 Berlin",
+      "category": 10,
+      "geographic_entity": true,
+      "phone": "0172 381 41 83",
+      "inexact_location": true,
+      "published": true,
+      "email": "Christina.Hofmann@t-online.de",
+      "website": "",
+      "description": ""
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 95,
+    "fields": {
+      "name": "Ingrid Christina Hornoi",
+      "address": "12357 Berlin",
+      "category": 10,
+      "geographic_entity": true,
+      "phone": "0173 4562527",
+      "inexact_location": true,
+      "published": true,
+      "email": "Ingrid.Hessaun-Nicolae@gmx.de",
+      "website": "",
+      "description": ""
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 96,
+    "fields": {
+      "name": "Dana Jelescu",
+      "address": "14089 Berlin",
+      "category": 10,
+      "geographic_entity": true,
+      "phone": "0174 7291584",
+      "inexact_location": true,
+      "published": true,
+      "email": "ost.west@gmx.net",
+      "website": "",
+      "description": ""
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 97,
+    "fields": {
+      "name": "Michael Kahana",
+      "address": "10707 Berlin",
+      "category": 10,
+      "geographic_entity": true,
+      "phone": "0171-2100237",
+      "inexact_location": true,
+      "published": true,
+      "email": "Kahana@t-online.de",
+      "website": "",
+      "description": ""
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 98,
+    "fields": {
+      "name": "Helga Karnauka",
+      "address": "10405 Berlin",
+      "category": 10,
+      "geographic_entity": true,
+      "phone": "030 4424359",
+      "inexact_location": true,
+      "published": true,
+      "email": "",
+      "website": "",
+      "description": ""
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 99,
+    "fields": {
+      "name": "Dr. Corinna Leschber",
+      "address": "14167 Berlin",
+      "category": 10,
+      "geographic_entity": true,
+      "phone": "0177 238 03 63",
+      "inexact_location": true,
+      "published": true,
+      "email": "leschber@institute-lccs.com",
+      "website": "",
+      "description": ""
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 100,
+    "fields": {
+      "name": "Marieta Maiorovici\t",
+      "address": "12051 Berlin",
+      "category": 10,
+      "geographic_entity": true,
+      "phone": "0172 311 75 97",
+      "inexact_location": true,
+      "published": true,
+      "email": "maiorovici@t-online.de",
+      "website": "",
+      "description": ""
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 101,
+    "fields": {
+      "name": "Ernst-Johann Meinhardt",
+      "address": "13129 Berlin",
+      "category": 10,
+      "geographic_entity": true,
+      "phone": "0170 7789867",
+      "inexact_location": true,
+      "published": true,
+      "email": "ernst.meinhardt@online.de",
+      "website": "",
+      "description": ""
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 102,
+    "fields": {
+      "name": "Monika Michel\t",
+      "address": "12621 Berlin",
+      "category": 10,
+      "geographic_entity": true,
+      "phone": "0171 822 64 84",
+      "inexact_location": true,
+      "published": true,
+      "email": "michel.berlin@t-online.de",
+      "website": "",
+      "description": ""
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 103,
+    "fields": {
+      "name": "Hans-J\u00fcrgen Nagel",
+      "address": "12059 Berlin",
+      "category": 10,
+      "geographic_entity": true,
+      "phone": "0178 54360 42",
+      "inexact_location": true,
+      "published": true,
+      "email": "hans-juergen.nagel@arcor.de",
+      "website": "",
+      "description": ""
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 104,
+    "fields": {
+      "name": "Cornelia Potzel",
+      "address": "10967 Berlin",
+      "category": 10,
+      "geographic_entity": true,
+      "phone": "0172 312 28 19",
+      "inexact_location": true,
+      "published": true,
+      "email": "c.potzel@writeme.com",
+      "website": "",
+      "description": ""
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 105,
+    "fields": {
+      "name": "Chiya Saky",
+      "address": "13407 Berlin",
+      "category": 10,
+      "geographic_entity": true,
+      "phone": "0172 3200547",
+      "inexact_location": true,
+      "published": true,
+      "email": "Saky.c@debitel.net",
+      "website": "",
+      "description": ""
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 106,
+    "fields": {
+      "name": "Heinrich Schuller",
+      "address": "12203 Berlin",
+      "category": 10,
+      "geographic_entity": true,
+      "phone": "0172 310 28 86",
+      "inexact_location": true,
+      "published": true,
+      "email": "heinrich.schuller@gmx.de",
+      "website": "",
+      "description": ""
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 107,
+    "fields": {
+      "name": "Enik\u00f6 Soucek",
+      "address": "12163 Berlin",
+      "category": 10,
+      "geographic_entity": true,
+      "phone": "0171 8349245",
+      "inexact_location": true,
+      "published": true,
+      "email": "enikoesoucek@t-online.de",
+      "website": "",
+      "description": ""
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 108,
+    "fields": {
+      "name": "Cristina Weber",
+      "address": "15377 Oberbarnim",
+      "category": 10,
+      "geographic_entity": true,
+      "phone": "0170 2211112",
+      "inexact_location": true,
+      "published": true,
+      "email": "cristina@dolmetscherin24.de",
+      "website": "https://www.dolmetscherin24.de",
+      "description": ""
+    }
+  }
+]

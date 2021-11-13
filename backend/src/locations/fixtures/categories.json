@@ -12,18 +12,18 @@
     "model": "locations.category",
     "pk": 2,
     "fields": {
-      "name_slug": "public-institution",
-      "label_singular": "Instituție de stat",
-      "label_plural": "Instituții de stat"
+      "name_slug": "institution-or-ngo",
+      "label_singular": "Instituție/asociație",
+      "label_plural": "Instituții/asociații"
     }
   },
   {
     "model": "locations.category",
     "pk": 3,
     "fields": {
-      "name_slug": "shop",
-      "label_singular": "Magazin",
-      "label_plural": "Magazine"
+      "name_slug": "food",
+      "label_singular": "Mâncare",
+      "label_plural": "Mâncare"
     }
   },
   {
@@ -66,54 +66,36 @@
     "model": "locations.category",
     "pk": 8,
     "fields": {
-      "name_slug": "place-of-worship",
-      "label_singular": "Lăcaș de cult",
-      "label_plural": "Lăcașuri de cult"
+      "name_slug": "church",
+      "label_singular": "Biserică",
+      "label_plural": "Biserici"
     }
   },
   {
     "model": "locations.category",
     "pk": 9,
     "fields": {
-      "name_slug": "general-practitioner",
-      "label_singular": "Medic generalist",
-      "label_plural": "Medici generaliști"
+      "name_slug": "medic",
+      "label_singular": "Medic",
+      "label_plural": "Medici"
     }
   },
   {
     "model": "locations.category",
     "pk": 10,
     "fields": {
-      "name_slug": "medical-specialist",
-      "label_singular": "Medic specialist",
-      "label_plural": "Medici specialiști"
+      "name_slug": "translator",
+      "label_singular": "Traducător",
+      "label_plural": "Traducători"
     }
   },
   {
     "model": "locations.category",
     "pk": 11,
     "fields": {
-      "name_slug": "dentist",
-      "label_singular": "Medic stomatolog",
-      "label_plural": "Medici stomatologi"
-    }
-  },
-  {
-    "model": "locations.category",
-    "pk": 12,
-    "fields": {
-      "name_slug": "info-source",
-      "label_singular": "Sursă de informații",
-      "label_plural": "Surse de informații"
-    }
-  },
-  {
-    "model": "locations.category",
-    "pk": 13,
-    "fields": {
-      "name_slug": "translator",
-      "label_singular": "Traducător",
-      "label_plural": "Traducători"
+      "name_slug": "accountant",
+      "label_singular": "Contabil",
+      "label_plural": "Contabili"
     }
   }
 ]

@@ -5,7 +5,7 @@ from .serializers import CategorySerializer, LocationSerializer
 
 
 class LocationViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Location.objects.all()
+    queryset = Location.objects.filter(published=True, geographic_entity=True)
     serializer_class = LocationSerializer
     filterset_fields = ("category",)
 

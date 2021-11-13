@@ -1726,5 +1726,21 @@
       "website": "https://www.dolmetscherin24.de",
       "description": ""
     }
+  },
+  {
+    "model": "locations.location",
+    "pk": 109,
+    "fields": {
+      "name": "Mix Markt",
+      "address": "Jan-Petersen-Straße 18, 12679 Berlin",
+      "category": 3,
+      "geographic_entity": true,
+      "phone": "",
+      "inexact_location": false,
+      "published": true,
+      "email": "",
+      "website": "https://www.mixmarkt.eu/ro/germania/piete/14/",
+      "description": ""
+    }
   }
 ]

@@ -15,27 +15,31 @@ const SIZE = 25;
  * @param {function} onClick Callback for a click event on a pin.
  */
 function Pins({ data, onClick }) {
-  return data.map((location, index) => {
-    const [lon, lat] = location.geometry.coordinates;
-    const { category } = location.properties;
-    return (
-      <Marker key={`marker-${index}`} longitude={lon} latitude={lat}>
-        <svg
-          height={SIZE}
-          viewBox="0 0 24 24"
-          style={{
-            cursor: "pointer",
-            fill: CATEGORY_COLOR_MAP[category?.pk],
-            stroke: "none",
-            transform: `translate(${-SIZE / 2}px,${-SIZE}px)`,
-          }}
-          onClick={() => onClick(location)}
-        >
-          <path d={ICON} />
-        </svg>
-      </Marker>
-    );
-  });
+  return React.useMemo(
+    () =>
+      data.map((location, index) => {
+        const [lon, lat] = location.geometry.coordinates;
+        const { category } = location.properties;
+        return (
+          <Marker key={`marker-${index}`} longitude={lon} latitude={lat}>
+            <svg
+              height={SIZE}
+              viewBox="0 0 24 24"
+              style={{
+                cursor: "pointer",
+                fill: CATEGORY_COLOR_MAP[category?.pk],
+                stroke: "none",
+                transform: `translate(${-SIZE / 2}px,${-SIZE}px)`,
+              }}
+              onClick={() => onClick(location)}
+            >
+              <path d={ICON} />
+            </svg>
+          </Marker>
+        );
+      }),
+    [data, onClick]
+  );
 }
 
 // Important for performance: the markers never change, avoid rerender when the map viewport changes

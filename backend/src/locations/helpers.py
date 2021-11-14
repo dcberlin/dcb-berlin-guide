@@ -19,3 +19,4 @@ def set_coordinates_from_address(address, obj):
     logger.info("Geocoding successful for: '%s'", address)
     lat, lng = g.latlng
     obj.point = Point(lng, lat)
+    obj.save()

@@ -7,7 +7,7 @@ import {
   useHistory,
 } from "react-router-dom";
 import { QueryClient, QueryClientProvider, useQuery } from "react-query";
-import { Dialog, Transition } from "@headlessui/react";
+import { Menu, Dialog, Transition } from "@headlessui/react";
 import { XCircleIcon } from "@heroicons/react/outline";
 import {
   LocationMarkerIcon,
@@ -164,10 +164,15 @@ function Home() {
             <img alt="Logo of Diaspora Civica Berlin" src={dcbLogo} />
           </a>
         </div>
+        <Disclaimer />
       </div>
       <div className="absolute inset-0">
         <ModalMap data={locationData} category={category} />
-        <div className="absolute bottom-20 right-0">
+        <div
+          className={`absolute bottom-20 right-0 transition duration-300 delay-100 ease-in-out opacity-${
+            !location ? 100 : 0
+          }`}
+        >
           <Select data={categoryData} />
         </div>
       </div>
@@ -352,6 +357,100 @@ function ModalMap({ data }) {
     <>
       <Map locations={{ ...data, features }} />
       <POIModal />
+    </>
+  );
+}
+
+/**
+ * Disclaimer modal with fixed position button
+ */
+function Disclaimer() {
+  let [isOpen, setIsOpen] = React.useState(false);
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  return (
+    <>
+      <button
+        type="button"
+        onClick={openModal}
+        className="fixed right-0 bottom-10 p-2 text-left bg-white shadow-md cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 text-xs rounded-l-2xl uppercase font-semibold"
+      >
+        Disclaimer
+      </button>
+
+      <Transition appear show={isOpen} as={React.Fragment}>
+        <Dialog
+          as="div"
+          className="fixed inset-0 z-30 overflow-y-auto"
+          onClose={closeModal}
+        >
+          <div className="min-h-screen px-4 text-center">
+            <Transition.Child
+              as={React.Fragment}
+              enter="ease-out duration-300"
+              enterFrom="opacity-0"
+              enterTo="opacity-100"
+              leave="ease-in duration-200"
+              leaveFrom="opacity-100"
+              leaveTo="opacity-0"
+            >
+              <Dialog.Overlay className="fixed inset-0" />
+            </Transition.Child>
+
+            <span
+              className="inline-block h-screen align-middle"
+              aria-hidden="true"
+            >
+              &#8203;
+            </span>
+            <Transition.Child
+              as={React.Fragment}
+              enter="ease-out duration-300"
+              enterFrom="opacity-0 scale-95"
+              enterTo="opacity-100 scale-100"
+              leave="ease-in duration-200"
+              leaveFrom="opacity-100 scale-100"
+              leaveTo="opacity-0 scale-95"
+            >
+              <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
+                <Dialog.Title
+                  as="h3"
+                  className="text-lg font-semibold leading-6 text-gray-900"
+                >
+                  Disclaimer
+                </Dialog.Title>
+                <div className="mt-2">
+                  <p className="text-md font-medium text-gray-500">
+                    Informațiile existente în prezenta hartă sunt cu titlu
+                    informativ și nu au caracter de recomandare. Diaspora Civică
+                    Berlin nu garantează în niciun fel acuratețea sau caracterul
+                    complet al informațiilor prezentate și nu poartă nicio
+                    răspundere pentru serviciile oferite de locațiile
+                    respective.
+                  </p>
+                </div>
+
+                <div className="mt-4">
+                  <button
+                    type="button"
+                    className="inline-flex justify-center font-semibold px-4 py-2 text-sm font-medium text-gray-900 bg-gray-100 border border-transparent rounded-md hover:bg-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-500"
+                    onClick={closeModal}
+                  >
+                    OK
+                  </button>
+                </div>
+              </div>
+            </Transition.Child>
+          </div>
+        </Dialog>
+      </Transition>
     </>
   );
 }

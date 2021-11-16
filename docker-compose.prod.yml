@@ -40,7 +40,7 @@ services:
         - "traefik.http.services.api.loadbalancer.server.port=8000"
         - "traefik.docker.network=traefik-public"
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8000/admin/"]
+      test: ["CMD", "curl", "-f", "http://harta.diasporacivica.berlin/admin/"]
       interval: 5s
       timeout: 10s
       retries: 5
@@ -71,7 +71,7 @@ services:
         - "traefik.http.services.webapp.loadbalancer.server.port=80"
         - "traefik.docker.network=traefik-public"
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost"]
+      test: ["CMD", "curl", "-f", "http://harta.diasporacivica.berlin"]
       interval: 5s
       timeout: 10s
       retries: 5

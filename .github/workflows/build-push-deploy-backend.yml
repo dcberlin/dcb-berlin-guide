@@ -8,6 +8,7 @@ on:
       - v*
     paths:
       - backend/**
+      - .github/**
 
 env:
   BACKEND_IMAGE_NAME: dcb_berlin_guide_backend

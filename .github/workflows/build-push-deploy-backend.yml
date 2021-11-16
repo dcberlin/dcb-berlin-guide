@@ -62,4 +62,4 @@ jobs:
           SSH_HOST: ${{ secrets.SSH_HOST }}
 
       - name: Deploy backend
-        run: ssh prod 'docker service update --image ghcr.io/03b8/dcb_berlin_guide_backend:latest berlin-guide_api'
+        run: ssh prod 'docker service update --image ghcr.io/03b8/dcb_berlin_guide_backend:latest berlin-guide_api && docker image prune -f'

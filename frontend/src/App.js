@@ -314,7 +314,7 @@ function POIModal() {
                 {website && (
                   <div className="flex items-center">
                     <LinkIcon className="flex-none h-5 w-5 mr-2 text-gray-600" />
-                    <a href={website} className="text-blue-600">
+                    <a href={website} target="_blank" className="text-blue-600">
                       {website}
                     </a>
                   </div>

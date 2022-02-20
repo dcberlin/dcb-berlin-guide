@@ -34,3 +34,29 @@ class LocationSerializer(GeoFeatureModelSerializer):
             "inexact_location",
             "published",
         ]
+
+
+class LocationProposalSerializer(GeoFeatureModelSerializer):
+    """
+    This serializer is used only when new location proposals are submitted.
+    It covers a restricted set of fields. The rest of the fields have to be
+    filled in by content reviewers.
+    """
+
+    user_submitted = serializers.HiddenField(default=True)
+
+    class Meta:
+        model = Location
+        geo_field = "point"
+        fields = [
+            "name",
+            "address",
+            "website",
+            "email",
+            "description",
+            "phone",
+            "user_submitted",
+        ]
+        extra_kwargs = {
+            field: {"required": True} for field in ["name", "address", "description"]
+        }

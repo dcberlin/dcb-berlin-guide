@@ -463,6 +463,7 @@ function Disclaimer() {
 function LocationProposalModal() {
   let [isOpen, setIsOpen] = React.useState(false);
   let [locationSubmitted, setLocationSubmitted] = React.useState(false);
+  let [requestFailed, setRequestFailed] = React.useState(false);
 
   function closeModal() {
     setIsOpen(false);
@@ -470,6 +471,7 @@ function LocationProposalModal() {
 
   function openModal() {
     setLocationSubmitted(false);
+    setRequestFailed(false);
     setIsOpen(true);
   }
 
@@ -477,9 +479,34 @@ function LocationProposalModal() {
     fetch(`${API_URL}/api/location-proposal/`, {
       method: "POST", body: JSON.stringify(values),
       headers: { "Content-Type": "application/json" }
+    }).then(response => {
+      if (response.status !== 201) {
+        setRequestFailed(true);
+      } else {
+        setLocationSubmitted(true);
+      }
     });
-    setLocationSubmitted(true);
   }
+
+  function validate(values, props) {
+    const errors = {};
+
+    if (!values.name) {
+      errors.name = "Numele este câmp obligatoriu.";
+    }
+    if (!values.address) {
+      errors.address = "Adresa este câmp obligatoriu.";
+    }
+    if (values.email !== "" && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+      errors.email = "Adresa de mail este invalidă.";
+    }
+    if (values.website !== "" && !/^https?:\/\/.*$/.test(values.website)) {
+      errors.website = "Adresa site-ului este invalidă.";
+    }
+
+    return errors;
+
+  };
 
   const SubmissionForm = (
     <>
@@ -495,58 +522,77 @@ function LocationProposalModal() {
           address: '',
           description: '',
           website: '',
+          email: '',
           phone: '',
         }}
         onSubmit={handleSubmit}
+        validate={validate}
       >
-        <Form className="mt-8">
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm mb-2 font-semibold" htmlFor="name">
-              Numele locaţiei
-            </label>
-            <Field className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="name" id="name" type="text" placeholder="Centrul comunitar Gropiusstadt"/>
-          </div>
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm mb-2 font-semibold" htmlFor="address">
-              Adresa
-            </label>
-            <Field className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="address" id="address" type="text" placeholder="Karl-Marx-Allee 999, 10101 Berlin"/>
-          </div>
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm mb-2 font-semibold" htmlFor="description">
-              Descriere
-            </label>
-            <Field className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="description" id="description" type="text" placeholder="Centru care organizează activităţi sociale."/>
-          </div>
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm mb-2 font-semibold" htmlFor="website">
-              Website
-            </label>
-            <Field className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="website" id="website" type="url" placeholder="https://example.com"/>
-          </div>
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm mb-2 font-semibold" htmlFor="phone">
-              Telefon
-            </label>
-            <Field className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="phone" id="phone" type="tel" placeholder="+49 0819 1234 5678"/>
-          </div>
+        {({errors, touched}) => (
+          <Form className="mt-8">
+            <div className="mb-2">
+              <label className="block text-gray-700 text-sm mb-2 font-semibold" htmlFor="name">
+                Numele locaţiei
+              </label>
+              <Field className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${touched.name && errors.name && "border-red-500"}`} name="name" id="name" type="text" placeholder="Centrul comunitar Gropiusstadt"/>
+              <p class="text-red-500 my-1 text-sm h-4">{touched.name && errors.name}</p>
+            </div>
+            <div className="mb-2">
+              <label className="block text-gray-700 text-sm mb-2 font-semibold" htmlFor="address">
+                Adresa
+              </label>
+              <Field className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${touched.address && errors.address && "border-red-500"}`} name="address" id="address" type="text" placeholder="Karl-Marx-Allee 999, 10101 Berlin"/>
+              <p class="text-red-500 my-1 text-sm h-4">{touched.address && errors.address}</p>
+            </div>
+            <div className="mb-2 pb-4">
+              <label className="block text-gray-700 text-sm mb-2 font-semibold" htmlFor="description">
+                Descriere
+              </label>
+              <Field className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="description" id="description" type="text" placeholder="Centru care organizează activităţi sociale."/>
+            </div>
+            <div className="mb-2">
+              <label className="block text-gray-700 text-sm mb-2 font-semibold" htmlFor="website">
+                Website
+              </label>
+              <Field className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${touched.website && errors.website && "border-red-500"}`} name="website" id="website" type="url" placeholder="https://example.com"/>
+              <p class="text-red-500 my-1 text-sm h-4">{touched.website && errors.website}</p>
+            </div>
+            <div className="mb-2">
+              <label className="block text-gray-700 text-sm mb-2 font-semibold" htmlFor="email">
+                E-Mail
+              </label>
+              <Field className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${touched.email && errors.email && "border-red-500"}`} name="email" id="email" type="email" placeholder="centru@example.com"/>
+              <p class="text-red-500 my-1 text-sm h-4">{touched.email && errors.email}</p>
+            </div>
+            <div className="mb-2">
+              <label className="block text-gray-700 text-sm mb-2 font-semibold" htmlFor="phone">
+                Telefon
+              </label>
+              <Field className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="phone" id="phone" type="tel" placeholder="+49 0819 1234 5678"/>
+            </div>
 
-          <div className="flex mt-8 items-center justify-between">
-            <button
-              type="button"
-              className="inline-flex justify-center font-semibold px-4 py-2 text-sm font-medium text-gray-900 bg-red-100 border border-transparent rounded-md hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-500"
-              onClick={closeModal}
-            >
-              Anulează
-            </button>
-            <button
-              type="submit"
-              className="inline-flex justify-center font-semibold px-4 py-2 text-sm font-medium text-gray-900 bg-green-100 border border-transparent rounded-md hover:bg-green-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-500"
-            >
-              Trimite
-            </button>
-          </div>
-        </Form>
+            <div className="flex mt-8 items-center justify-between">
+              <button
+                type="button"
+                className="inline-flex justify-center font-semibold px-4 py-2 text-sm font-medium text-gray-900 bg-red-100 border border-transparent rounded-md hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-500"
+                onClick={closeModal}
+              >
+                Anulează
+              </button>
+              <button
+                type="submit"
+                className="inline-flex justify-center font-semibold px-4 py-2 text-sm font-medium text-gray-900 bg-green-100 border border-transparent rounded-md hover:bg-green-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-500"
+              >
+                Trimite
+              </button>
+            </div>
+            {
+              requestFailed && <p class="text-red-500 my-3 text-sm font-semibold h-4">
+                Oops, ceva n-a mers :( mai încearcă sau contactează-ne la contact@diasporacivica.berlin
+              </p>
+            }
+          </Form>
+        )}
       </Formik>
     </>
   )

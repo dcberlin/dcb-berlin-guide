@@ -153,6 +153,8 @@ REST_FRAMEWORK = {
         "rest_framework.throttling.ScopedRateThrottle",
     ],
     "DEFAULT_THROTTLE_RATES": {"read-only": "1000/day", "location-proposal": "10/day"},
+    'DEFAULT_AUTHENTICATION_CLASSES': [],
+    'DEFAULT_PERMISSION_CLASSES': [],
 }
 
 STATIC_ROOT = BASE_DIR / "staticfiles"

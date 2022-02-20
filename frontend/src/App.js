@@ -7,7 +7,7 @@ import {
   useHistory,
 } from "react-router-dom";
 import { QueryClient, QueryClientProvider, useQuery } from "react-query";
-import { Menu, Dialog, Transition } from "@headlessui/react";
+import { Dialog, Transition } from "@headlessui/react";
 import { XCircleIcon } from "@heroicons/react/outline";
 import {
   LocationMarkerIcon,
@@ -314,7 +314,7 @@ function POIModal() {
                 {website && (
                   <div className="flex items-center">
                     <LinkIcon className="flex-none h-5 w-5 mr-2 text-gray-600" />
-                    <a href={website} target="_blank" className="text-blue-600">
+                    <a href={website} target="_blank" rel="noreferrer" className="text-blue-600">
                       {website}
                     </a>
                   </div>

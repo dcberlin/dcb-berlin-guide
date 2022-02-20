@@ -6,7 +6,14 @@ from .helpers import set_coordinates_from_address
 
 @admin.register(Location)
 class LocationAdmin(admin.OSMGeoAdmin):
-    list_display = ("name", "category", "address", "published", "coordinates")
+    list_display = (
+        "name",
+        "category",
+        "address",
+        "published",
+        "coordinates",
+        "user_submitted",
+    )
 
     default_lon = 1489458
     default_lat = 6894156

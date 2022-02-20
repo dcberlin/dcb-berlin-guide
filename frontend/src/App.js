@@ -7,7 +7,7 @@ import {
   useHistory,
 } from "react-router-dom";
 import { QueryClient, QueryClientProvider, useQuery } from "react-query";
-import { Menu, Dialog, Transition } from "@headlessui/react";
+import { Dialog, Transition } from "@headlessui/react";
 import { XCircleIcon } from "@heroicons/react/outline";
 import {
   LocationMarkerIcon,
@@ -16,8 +16,9 @@ import {
   PhoneIcon,
 } from "@heroicons/react/solid";
 import { easeCubic } from "d3-ease";
+import { Formik, Field, Form } from "formik";
 
-import { MAPBOX_TOKEN } from "./constants";
+import { API_URL, MAPBOX_TOKEN } from "./constants";
 import { fetchCategories, fetchLocations, useQueryParams } from "./utils";
 import {
   CategoryProvider,
@@ -165,6 +166,7 @@ function Home() {
           </a>
         </div>
         <Disclaimer />
+        <LocationProposalModal />
       </div>
       <div className="absolute inset-0">
         <ModalMap data={locationData} category={category} />
@@ -314,7 +316,7 @@ function POIModal() {
                 {website && (
                   <div className="flex items-center">
                     <LinkIcon className="flex-none h-5 w-5 mr-2 text-gray-600" />
-                    <a href={website} target="_blank" className="text-blue-600">
+                    <a href={website} target="_blank" rel="noreferrer" className="text-blue-600">
                       {website}
                     </a>
                   </div>
@@ -380,7 +382,7 @@ function Disclaimer() {
       <button
         type="button"
         onClick={openModal}
-        className="fixed right-0 bottom-10 p-2 text-left bg-white shadow-md cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 text-xs rounded-l-2xl uppercase font-semibold"
+        className="fixed left-40 bottom-0 p-2 text-left bg-white bg-opacity-50 shadow-md cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 text-xs rounded-t-2xl uppercase font-semibold text-gray-600"
       >
         Disclaimer
       </button>
@@ -446,6 +448,176 @@ function Disclaimer() {
                     OK
                   </button>
                 </div>
+              </div>
+            </Transition.Child>
+          </div>
+        </Dialog>
+      </Transition>
+    </>
+  );
+}
+
+/**
+ * Modal for proposing a new location
+ */
+function LocationProposalModal() {
+  let [isOpen, setIsOpen] = React.useState(false);
+  let [locationSubmitted, setLocationSubmitted] = React.useState(false);
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
+  function openModal() {
+    setLocationSubmitted(false);
+    setIsOpen(true);
+  }
+
+  async function handleSubmit(values) {
+    fetch(`${API_URL}/api/location-proposal/`, {
+      method: "POST", body: JSON.stringify(values),
+      headers: { "Content-Type": "application/json" }
+    });
+    setLocationSubmitted(true);
+  }
+
+  const SubmissionForm = (
+    <>
+      <Dialog.Title
+        as="h3"
+        className="text-lg font-semibold leading-6 text-gray-900"
+      >
+        💌 Lipseşte vreun loc? Trimite-ni-l!
+      </Dialog.Title>
+      <Formik
+        initialValues={{
+          name: '',
+          address: '',
+          description: '',
+          website: '',
+          phone: '',
+        }}
+        onSubmit={handleSubmit}
+      >
+        <Form className="mt-8">
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm mb-2 font-semibold" htmlFor="name">
+              Numele locaţiei
+            </label>
+            <Field className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="name" id="name" type="text" placeholder="Centrul comunitar Gropiusstadt"/>
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm mb-2 font-semibold" htmlFor="address">
+              Adresa
+            </label>
+            <Field className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="address" id="address" type="text" placeholder="Karl-Marx-Allee 999, 10101 Berlin"/>
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm mb-2 font-semibold" htmlFor="description">
+              Descriere
+            </label>
+            <Field className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="description" id="description" type="text" placeholder="Centru care organizează activităţi sociale."/>
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm mb-2 font-semibold" htmlFor="website">
+              Website
+            </label>
+            <Field className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="website" id="website" type="url" placeholder="https://example.com"/>
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm mb-2 font-semibold" htmlFor="phone">
+              Telefon
+            </label>
+            <Field className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="phone" id="phone" type="tel" placeholder="+49 0819 1234 5678"/>
+          </div>
+
+          <div className="flex mt-8 items-center justify-between">
+            <button
+              type="button"
+              className="inline-flex justify-center font-semibold px-4 py-2 text-sm font-medium text-gray-900 bg-red-100 border border-transparent rounded-md hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-500"
+              onClick={closeModal}
+            >
+              Anulează
+            </button>
+            <button
+              type="submit"
+              className="inline-flex justify-center font-semibold px-4 py-2 text-sm font-medium text-gray-900 bg-green-100 border border-transparent rounded-md hover:bg-green-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-500"
+            >
+              Trimite
+            </button>
+          </div>
+        </Form>
+      </Formik>
+    </>
+  )
+
+  const SuccessContent = (
+    <>
+      <Dialog.Title
+        as="h3"
+        className="text-lg font-semibold leading-6 text-gray-900"
+      >
+        🎉 Mulţumim pentru sugestie!
+      </Dialog.Title>
+      <div className="flex mt-8">
+        <button
+          type="button"
+          className="inline-flex justify-center font-semibold px-4 py-2 text-sm font-medium text-gray-900 bg-gray-100 border border-transparent rounded-md hover:bg-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-500"
+          onClick={closeModal}
+        >
+          Cu plăcere 😁
+        </button>
+      </div>
+    </>
+  )
+
+  return (
+    <>
+      <button
+        type="button"
+        onClick={openModal}
+        className="fixed right-0 bottom-10 p-2 text-left bg-white shadow-md cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 text-xs rounded-l-2xl uppercase font-semibold"
+      >
+        Propune o locaţie nouă
+      </button>
+
+      <Transition appear show={isOpen} as={React.Fragment}>
+        <Dialog
+          as="div"
+          className="fixed inset-0 z-30 overflow-y-auto"
+          onClose={closeModal}
+        >
+          <div className="min-h-screen px-4 text-center">
+            <Transition.Child
+              as={React.Fragment}
+              enter="ease-out duration-300"
+              enterFrom="opacity-0"
+              enterTo="opacity-100"
+              leave="ease-in duration-200"
+              leaveFrom="opacity-100"
+              leaveTo="opacity-0"
+            >
+              <Dialog.Overlay className="fixed inset-0" />
+            </Transition.Child>
+
+            <span
+              className="inline-block h-screen align-middle"
+              aria-hidden="true"
+            >
+              &#8203;
+            </span>
+            <Transition.Child
+              as={React.Fragment}
+              enter="ease-out duration-300"
+              enterFrom="opacity-0 scale-95"
+              enterTo="opacity-100 scale-100"
+              leave="ease-in duration-200"
+              leaveFrom="opacity-100 scale-100"
+              leaveTo="opacity-0 scale-95"
+            >
+
+              <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
+                {locationSubmitted ? SuccessContent : SubmissionForm}
               </div>
             </Transition.Child>
           </div>

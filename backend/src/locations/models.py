@@ -19,6 +19,7 @@ class Location(gis_models.Model):
     geographic_entity = models.BooleanField(default=True)
     published = models.BooleanField(default=False)
     inexact_location = models.BooleanField(default=False)
+    user_submitted = models.BooleanField(default=False)
 
     @property
     def coordinates(self):

@@ -130,6 +130,15 @@ USE_L10N = True
 USE_TZ = True
 
 
+# Caching
+
+CACHING = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+    }
+}
+
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
@@ -140,6 +149,10 @@ REST_FRAMEWORK = {
     "DEFAULT_RENDERER_CLASSES": [
         "rest_framework.renderers.JSONRenderer",
     ],
+    "DEFAULT_THROTTLE_CLASSES": [
+        "rest_framework.throttling.ScopedRateThrottle",
+    ],
+    "DEFAULT_THROTTLE_RATES": {"read-only": "1000/day", "location-proposal": "10/day"},
 }
 
 STATIC_ROOT = BASE_DIR / "staticfiles"

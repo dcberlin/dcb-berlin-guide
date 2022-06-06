@@ -6,7 +6,7 @@ services:
       - POSTGRES_PASSWORD
 
   api:
-    image: "ghcr.io/03b8/dcb_berlin_guide_backend:${TAG:-latest}"
+    image: "ghcr.io/dcberlin/dcb_berlin_guide_backend:${TAG:-latest}"
     depends_on:
       - db
     command: gunicorn --bind 0.0.0.0:8000 berlin_guide.wsgi:application
@@ -50,7 +50,7 @@ services:
       - default
 
   webapp:
-    image: "ghcr.io/03b8/dcb_berlin_guide_frontend:${TAG:-latest}"
+    image: "ghcr.io/dcberlin/dcb_berlin_guide_frontend:${TAG:-latest}"
     depends_on:
       - api
     deploy:

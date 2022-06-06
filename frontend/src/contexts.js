@@ -1,5 +1,23 @@
 import * as React from "react";
 
+/* Search Phrase */
+
+const SearchPhraseContext = React.createContext();
+
+function useSearchPhrase() {
+  const context = React.useContext(SearchPhraseContext);
+  if (!context) {
+    throw new Error("useSearchPhrase must be used within a SearchPhraseProvider");
+  }
+  return context;
+}
+
+function SearchPhraseProvider(props) {
+  const [searchPhrase, setSearchPhrase] = React.useState(null);
+  const value = React.useMemo(() => [searchPhrase, setSearchPhrase], [searchPhrase]);
+  return <SearchPhraseContext.Provider value={value} {...props} />;
+}
+
 /* Location */
 
 const LocationContext = React.createContext();
@@ -36,4 +54,8 @@ function CategoryProvider(props) {
   return <CategoryContext.Provider value={value} {...props} />;
 }
 
-export { useLocation, LocationProvider, useCategory, CategoryProvider };
+export {
+  useLocation, LocationProvider,
+  useCategory, CategoryProvider,
+  useSearchPhrase, SearchPhraseProvider,
+};

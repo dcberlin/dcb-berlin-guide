@@ -25,9 +25,13 @@ import {
   useCategory,
   LocationProvider,
   useLocation,
+  SearchPhraseProvider,
+  useSearchPhrase,
 } from "./contexts";
+import { useDebounce } from "./hooks";
 import Pins from "./Pins";
 import Select from "./Select";
+import SearchInput from "./SearchInput";
 import dcbLogo from "./images/dcbLogo.png";
 
 import "./App.css";
@@ -42,7 +46,9 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <CategoryProvider>
         <LocationProvider>
-          <Routes />
+          <SearchPhraseProvider>
+            <Routes />
+          </SearchPhraseProvider>
         </LocationProvider>
       </CategoryProvider>
     </QueryClientProvider>
@@ -70,6 +76,8 @@ function Routes() {
 function Home() {
   const [category, setCategory] = useCategory();
   const [location, setLocation] = useLocation();
+  const [searchPhrase, setSearchPhrase] = useSearchPhrase();
+  const debouncedSearchPhrase = useDebounce(searchPhrase, 600);
   const history = useHistory();
   const query = useQueryParams();
 
@@ -86,7 +94,7 @@ function Home() {
     isLoading: locationIsLoading,
     error: locationError,
     data: locationData,
-  } = useQuery("locations", fetchLocations, {
+  } = useQuery(["locations", debouncedSearchPhrase], () => fetchLocations({search: searchPhrase || ""}), {
     placeholderData: { features: [] },
   });
 
@@ -167,6 +175,7 @@ function Home() {
         </div>
         <Disclaimer />
         <LocationProposalModal />
+        <SearchInput />
       </div>
       <div className="absolute inset-0">
         <ModalMap data={locationData} category={category} />

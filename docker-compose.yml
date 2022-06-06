@@ -19,6 +19,8 @@ services:
     build: backend
     depends_on: 
       - db
+    environment:
+      PIP_DEFAULT_TIMEOUT: 100
     ports:
       - 8000:8000
 

@@ -1,3 +1,4 @@
+from django.contrib.postgres.search import SearchQuery, SearchVector
 from rest_framework import generics, viewsets
 from rest_framework.throttling import AnonRateThrottle
 
@@ -19,6 +20,25 @@ class LocationViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = LocationSerializer
     filterset_fields = ("category",)
     throttle_scope = "read-only"
+
+
+    def get_queryset(self):
+        """
+        Optionally restricts the returned POIs by filtering against a `search`
+        query parameter in the URL.
+        """
+        queryset = self.queryset
+        if search_phrase := self.request.query_params.get("search"):
+            return queryset.annotate(
+                search=SearchVector(
+                    "name",
+                    "description",
+                    "category__label_singular",
+                    "category__label_plural",
+                    config="romanian",
+                )
+            ).filter(search=str(search_phrase))
+        return queryset
 
 
 class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
